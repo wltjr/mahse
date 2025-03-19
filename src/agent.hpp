@@ -19,7 +19,7 @@ class Agent
 
     private:
         bool satisfied;
-        int partition;  // Π
+        std::vector<std::vector<Agent>> partitions;  // Π
         int iterations; // r
         float seed; // s [0,1] uniform-random variable
 
@@ -35,8 +35,8 @@ class Agent
          * 
          * @return a tuple (iterations, seed, partition, satisfied)
          */
-        std::tuple<int, float, int, bool> decision_mutex(
-            std::vector<std::tuple<int, float, int, bool>> msgs
+        std::tuple<int, float, std::vector<std::vector<Agent>>, bool> decision_mutex(
+            std::vector<std::tuple<int, float, std::vector<std::vector<Agent>>, bool>> msgs
         );
 };
 #endif
