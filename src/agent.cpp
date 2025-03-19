@@ -12,7 +12,8 @@ void Agent::decision()
     satisfied = false;
     iterations = 0;
     seed = 0;
-    partition = 0; // Π = {S_0 = A, S_j = ∅ ∀t_j ∈ T }
+    // empty set of partitions, vector of agent vectors
+    partitions.clear(); // Π = {S_0 = A, S_j = ∅ ∀t_j ∈ T }
 
     // Decision-making process begins
     while(true)
@@ -41,20 +42,20 @@ void Agent::decision()
 
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
-        std::vector<std::tuple<int, float, int, bool>> msgs;
+        std::vector<std::tuple<int, float, std::vector<std::vector<Agent>>, bool>> msgs;
 
         // {r^i , s^i , Π^i }, satisfied = decision_mutex(M^i_rcv)
         const auto msg = decision_mutex(msgs);
         iterations = std::get<0>(msg);
         seed = std::get<1>(msg);
-        partition = std::get<2>(msg);
+        partitions = std::get<2>(msg);
         satisfied = std::get<3>(msg);
     }
 }
 
 
-std::tuple<int, float, int, bool> Agent::decision_mutex(
-    std::vector<std::tuple<int, float, int, bool>> msgs
+std::tuple<int, float, std::vector<std::vector<Agent>>, bool> Agent::decision_mutex(
+    std::vector<std::tuple<int, float, std::vector<std::vector<Agent>>, bool>> msgs
 )
 {
     satisfied = true;
@@ -62,7 +63,7 @@ std::tuple<int, float, int, bool> Agent::decision_mutex(
     {
         int r_k;
         float s_k;
-        int p_k;
+        std::vector<std::vector<Agent>> p_k;
 
         r_k = std::get<0>(msg);
         s_k = std::get<1>(msg);
@@ -72,9 +73,9 @@ std::tuple<int, float, int, bool> Agent::decision_mutex(
         {
             iterations = r_k;
             seed = s_k;
-            partition = p_k;
+            partitions = p_k;
             satisfied = false;
         }
     }
-    return std::make_tuple(iterations, seed, partition, satisfied);
+    return std::make_tuple(iterations, seed, partitions, satisfied);
 }
