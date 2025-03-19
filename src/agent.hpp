@@ -21,7 +21,7 @@ class Agent
         bool satisfied;
         int partition;  // Π
         int iterations; // r
-        int seed; // s [0,1] uniform-random variable
+        float seed; // s [0,1] uniform-random variable
 
         /**
          * @brief Decentralized decision-making algorithm
@@ -35,8 +35,8 @@ class Agent
          * 
          * @return a tuple (iterations, seed, partition, satisfied)
          */
-        std::tuple<int, int, int, bool> decision_mutex(
-            std::vector<std::tuple<int, int, int, bool>> msgs
+        std::tuple<int, float, int, bool> decision_mutex(
+            std::vector<std::tuple<int, float, int, bool>> msgs
         );
 };
 #endif
