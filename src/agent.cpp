@@ -30,7 +30,7 @@ void Agent::decision()
 
                 std::random_device rd;
                 std::mt19937 gen(rd());
-                std::uniform_real_distribution<> urd(0,1);
+                std::uniform_real_distribution<> urd(0.0,1.0);
                 seed = urd(gen);
             }
             satisfied = true;
@@ -41,7 +41,7 @@ void Agent::decision()
 
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
-        std::vector<std::tuple<int, int, int, bool>> msgs;
+        std::vector<std::tuple<int, float, int, bool>> msgs;
 
         // {r^i , s^i , Π^i }, satisfied = decision_mutex(M^i_rcv)
         const auto msg = decision_mutex(msgs);
@@ -53,15 +53,15 @@ void Agent::decision()
 }
 
 
-std::tuple<int, int, int, bool> Agent::decision_mutex(
-    std::vector<std::tuple<int, int, int, bool>> msgs
+std::tuple<int, float, int, bool> Agent::decision_mutex(
+    std::vector<std::tuple<int, float, int, bool>> msgs
 )
 {
     satisfied = true;
     for (auto &msg : msgs)
     {
         int r_k;
-        int s_k;
+        float s_k;
         int p_k;
 
         r_k = std::get<0>(msg);
