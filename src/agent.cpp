@@ -4,8 +4,11 @@
 
 Agent::Agent() = default;
 
-Agent::Agent(int id, Point coords) :
-    id(id), coords(coords) {};
+Agent::Agent(int id, Point coords, std::vector<Task> &tasks) :
+    id(id), coords(coords), tasks(tasks) {
+        // create empty coalitions Sj for each task Tj
+        partitions.resize(tasks.size());
+};
 
 Agent::~Agent() = default;
 
