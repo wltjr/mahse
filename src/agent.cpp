@@ -4,6 +4,9 @@
 
 Agent::Agent() = default;
 
+Agent::Agent(int id, Point coords) :
+    id(id), coords(coords) {};
+
 Agent::~Agent() = default;
 
 void Agent::decision()
