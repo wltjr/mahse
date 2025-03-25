@@ -4,6 +4,8 @@
 #include <tuple>
 #include <vector>
 
+#include "point.hpp"
+
 class Agent
 {
     public:
@@ -13,11 +15,21 @@ class Agent
         Agent();
 
         /**
+         * @brief Construct a new Agent object
+         *
+         * @param id the task id
+         * @param coords the task coordinates (x,y)
+         */
+        Agent(int id, Point coords);
+
+        /**
          * @brief Destroy the Agent object, empty/unused
          */
         virtual ~Agent();
 
     private:
+        int id;
+        Point coords;
         bool satisfied;
         std::vector<std::vector<Agent>> partitions;  // Π
         int iterations; // r
