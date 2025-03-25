@@ -5,10 +5,7 @@
 Agent::Agent() = default;
 
 Agent::Agent(int id, Point coords, std::vector<Task> &tasks) :
-    id(id), coords(coords), tasks(tasks) {
-        // create empty coalitions Sj for each task Tj
-        partitions.resize(tasks.size());
-};
+    id(id), coords(coords), tasks(tasks) {};
 
 Agent::~Agent() = default;
 
@@ -18,8 +15,9 @@ void Agent::decision()
     satisfied = false;
     iterations = 0;
     seed = 0;
-    // empty set of partitions, vector of agent vectors
-    partitions.clear(); // Π = {S_0 = A, S_j = ∅ ∀t_j ∈ T }
+    // empty partition, vector of agent vectors
+    // create empty coalitions S_j for all task t_j
+    partitions.resize(tasks.size()); // Π = {S_0 = A, S_j = ∅ ∀t_j ∈ T }
 
     // Decision-making process begins
     while(true)
