@@ -4,7 +4,7 @@
 #include <tuple>
 #include <vector>
 
-#include "point.hpp"
+#include "task.hpp"
 
 class Agent
 {
@@ -19,8 +19,9 @@ class Agent
          *
          * @param id the task id
          * @param coords the task coordinates (x,y)
+         * @param tasks vector of tasks
          */
-        Agent(int id, Point coords);
+        Agent(int id, Point coords, std::vector<Task> &tasks);
 
         /**
          * @brief Destroy the Agent object, empty/unused
@@ -32,6 +33,7 @@ class Agent
         Point coords;
         bool satisfied;
         std::vector<std::vector<Agent>> partitions;  // Π
+        std::vector<Task> tasks; // T
         int iterations; // r
         float seed; // s [0,1] uniform-random variable
 
