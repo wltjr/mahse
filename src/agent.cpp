@@ -95,3 +95,16 @@ int Agent::distance(int task)
 
     return std::sqrt(x * x + y * y);
 }
+
+int Agent::reward_peaked(int task)
+{
+    int participants;
+    int desired;
+
+    participants = partitions[task].size();
+    desired = tasks[task].get_modifier();
+
+    return (tasks[task].get_reward() * participants) / desired *
+            std::pow(std::exp(1.0), -participants / desired + 1);
+            // std::pow(std::numbers::e, -participants / desired + 1)
+}
