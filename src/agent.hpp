@@ -34,6 +34,11 @@ class Agent
         int reward_peaked(int task);
 
         /**
+         * @brief Submodular reward function
+         */
+        int reward_submodular(int task);
+
+        /**
          * @brief Destroy the Agent object, empty/unused
          */
         virtual ~Agent();
