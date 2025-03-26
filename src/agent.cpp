@@ -108,3 +108,16 @@ int Agent::reward_peaked(int task)
             std::pow(std::exp(1.0), -participants / desired + 1);
             // std::pow(std::numbers::e, -participants / desired + 1)
 }
+
+int Agent::reward_submodular(int task)
+{
+    int participants;
+    int epsilon;
+
+    participants = partitions[task].size();
+    epsilon = tasks[task].get_modifier();
+
+    return tasks[task].get_reward() *
+           (std::log(participants + epsilon - 1) / std::log(epsilon))  // log(n) / log(base)
+           / participants;
+}
