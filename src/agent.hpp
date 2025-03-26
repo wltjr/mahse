@@ -29,6 +29,11 @@ class Agent
         int distance(int task);
 
         /**
+         * @brief Peaked-reward function
+         */
+        int reward_peaked(int task);
+
+        /**
          * @brief Destroy the Agent object, empty/unused
          */
         virtual ~Agent();
