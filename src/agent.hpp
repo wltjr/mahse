@@ -24,6 +24,11 @@ class Agent
         Agent(int id, Point coords, std::vector<Task> &tasks);
 
         /**
+         * @brief Euclidean distance between task and agent
+         */
+        int distance(int task);
+
+        /**
          * @brief Destroy the Agent object, empty/unused
          */
         virtual ~Agent();
