@@ -71,6 +71,7 @@ class Agent
         int iterations; // r
         float seed; // s [0,1] uniform-random variable
         int reward;
+        int task; // the task index number, e.g. the j in (t_j, S_j)
 
         /**
          * @brief Decentralized decision-making algorithm
