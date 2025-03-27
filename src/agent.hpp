@@ -31,16 +31,22 @@ class Agent
 
         /**
          * @brief Euclidean distance between task and agent
+         *
+         * @param task the task index number, e.g. the j in (t_j, S_j)
          */
         int distance(int task);
 
         /**
          * @brief Peaked-reward function
+         *
+         * @param task the task index number, e.g. the j in (t_j, S_j)
          */
         int reward_peaked(int task);
 
         /**
          * @brief Submodular reward function
+         *
+         * @param task the task index number, e.g. the j in (t_j, S_j)
          */
         int reward_submodular(int task);
 
