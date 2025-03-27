@@ -4,8 +4,8 @@
 
 Agent::Agent() = default;
 
-Agent::Agent(int id, Point coords, std::vector<Task> &tasks) :
-    id(id), coords(coords), tasks(tasks) {};
+Agent::Agent(int id, Point coords, std::vector<Task> &tasks, rewards reward) :
+    id(id), coords(coords), tasks(tasks), reward(reward) {};
 
 Agent::~Agent() = default;
 
@@ -120,4 +120,19 @@ int Agent::reward_submodular(int task)
     return tasks[task].get_reward() *
            (std::log(participants + epsilon - 1) / std::log(epsilon))  // log(n) / log(base)
            / participants;
+}
+
+int Agent::utility(int task)
+{
+    int value;
+
+    switch(reward)
+    {
+        case peaked:
+            value = reward_peaked(task);
+        default:
+            value = reward_submodular(task);
+    }
+
+    return value - distance(task);
 }
