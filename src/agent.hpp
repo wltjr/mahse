@@ -66,7 +66,7 @@ class Agent
         int id;
         Point coords;
         bool satisfied;
-        std::vector<std::vector<Agent>> partitions;  // Π
+        std::vector<std::vector<Agent *>> partitions;  // Π
         std::vector<Task> tasks; // T
         int iterations; // r
         float seed; // s [0,1] uniform-random variable
@@ -85,8 +85,8 @@ class Agent
          * 
          * @return a tuple (iterations, seed, partition, satisfied)
          */
-        std::tuple<int, float, std::vector<std::vector<Agent>>, bool> decision_mutex(
-            std::vector<std::tuple<int, float, std::vector<std::vector<Agent>>, bool>> msgs
+        std::tuple<int, float, std::vector<std::vector<Agent *>>, bool> decision_mutex(
+            std::vector<std::tuple<int, float, std::vector<std::vector<Agent *>>, bool>> msgs
         );
 };
 #endif
