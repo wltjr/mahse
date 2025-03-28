@@ -25,7 +25,7 @@ endif()
 include_directories(src)
 
 # executable binaries
-add_executable(grape src/main.cpp src/agent.cpp)
+add_executable(grape src/main.cpp src/agent.cpp src/task.cpp)
 
 # link executable binaries to shared object libraries
 #target_link_libraries(some.exe PUBLIC MPI::MPI_CXX)
