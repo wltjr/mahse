@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <random>
 #include <limits>
 
@@ -14,12 +15,15 @@ void Agent::decision()
 {
     int task_max;
     int tasks_size;
+    int utility_cur;
+    int utility_max;
 
     // Initialization
     satisfied = false;
     iterations = 0;
     seed = 0;
-    task_max = std::numeric_limits<int>::min();
+    utility_cur = std::numeric_limits<int>::min();
+    utility_max = utility_cur;
     tasks_size = tasks.size();
     // empty partition, vector of agent vectors
     // create empty coalitions S_j for all task t_j
@@ -33,12 +37,28 @@ void Agent::decision()
         {
             // get the max utility for a given task and participants
             for(int j = 0; j < tasks_size; j++) //(t_j∗, |S_j∗|) = max ∀S j ∈Πi (t_j , |S_j ∪ {a_i}|)
-                task_max = std::max(task_max, utility(j));
+            {
+                int value;
+
+                value = utility(j);
+                if(value > utility_max)
+                {
+                    utility_max = value;
+                    task_max = j;
+                }
+            }
 
             // temp conditional replace with commented conditional code
-            if(iterations) // t_j∗, |S_j∗|) >_i (t_{Πi(i)} , |S_{Πi (i)}|)
+            if(utility_max > utility_cur) // t_j∗, |S_j∗|) >_i (t_{Πi(i)} , |S_{Πi (i)}|)
             {
+                // leave the current coalition (may need new structure O(N) operation)
+                partitions[task].erase(
+                    std::find(partitions[task].begin(), partitions[task].end(), this));
+                task = task_max;
+                utility_cur = utility_max;
+
                 // Join S_j∗ and update Π
+                partitions[task].push_back(this);
                 iterations++;
 
                 std::random_device rd;
@@ -54,7 +74,7 @@ void Agent::decision()
 
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
-        std::vector<std::tuple<int, float, std::vector<std::vector<Agent>>, bool>> msgs;
+        std::vector<std::tuple<int, float, std::vector<std::vector<Agent *>>, bool>> msgs;
 
         // {r^i , s^i , Π^i }, satisfied = decision_mutex(M^i_rcv)
         const auto msg = decision_mutex(msgs);
@@ -66,8 +86,8 @@ void Agent::decision()
 }
 
 
-std::tuple<int, float, std::vector<std::vector<Agent>>, bool> Agent::decision_mutex(
-    std::vector<std::tuple<int, float, std::vector<std::vector<Agent>>, bool>> msgs
+std::tuple<int, float, std::vector<std::vector<Agent *>>, bool> Agent::decision_mutex(
+    std::vector<std::tuple<int, float, std::vector<std::vector<Agent *>>, bool>> msgs
 )
 {
     satisfied = true;
@@ -75,7 +95,7 @@ std::tuple<int, float, std::vector<std::vector<Agent>>, bool> Agent::decision_mu
     {
         int r_k;
         float s_k;
-        std::vector<std::vector<Agent>> p_k;
+        std::vector<std::vector<Agent *>> p_k;
 
         r_k = std::get<0>(msg);
         s_k = std::get<1>(msg);
