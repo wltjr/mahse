@@ -138,8 +138,10 @@ int Agent::utility(int task)
     {
         case peaked:
             value = reward_peaked(task);
+            break;
         default:
             value = reward_submodular(task);
+            break;
     }
 
     return value - distance(task);
