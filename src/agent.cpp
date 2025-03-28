@@ -1,4 +1,5 @@
 #include <random>
+#include <limits>
 
 #include "agent.hpp"
 
@@ -11,13 +12,18 @@ Agent::~Agent() = default;
 
 void Agent::decision()
 {
+    int task_max;
+    int tasks_size;
+
     // Initialization
     satisfied = false;
     iterations = 0;
     seed = 0;
+    task_max = std::numeric_limits<int>::min();
+    tasks_size = tasks.size();
     // empty partition, vector of agent vectors
     // create empty coalitions S_j for all task t_j
-    partitions.resize(tasks.size()); // Π = {S_0 = A, S_j = ∅ ∀t_j ∈ T }
+    partitions.resize(tasks_size); // Π = {S_0 = A, S_j = ∅ ∀t_j ∈ T }
 
     // Decision-making process begins
     while(true)
@@ -25,7 +31,9 @@ void Agent::decision()
         // Make a new decision if necessary
         if(!satisfied)
         {
-            //(t_j∗, |S_j∗|) = max ∀S j ∈Πi (t_j , |S_j ∪ {a_i}|)
+            // get the max utility for a given task and participants
+            for(int j = 0; j < tasks_size; j++) //(t_j∗, |S_j∗|) = max ∀S j ∈Πi (t_j , |S_j ∪ {a_i}|)
+                task_max = std::max(task_max, utility(j));
 
             // temp conditional replace with commented conditional code
             if(iterations) // t_j∗, |S_j∗|) >_i (t_{Πi(i)} , |S_{Πi (i)}|)
