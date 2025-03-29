@@ -132,6 +132,10 @@ int Agent::reward_peaked(int task)
     participants = partitions[task].size();
     desired = tasks[task].get_modifier();
 
+    // add 1 to any task agent is not assigned to, simulate joining
+    if(task != this->task)
+        participants++;
+
     return (tasks[task].get_reward() * participants) / desired *
             std::pow(std::exp(1.0), -participants / desired + 1);
             // std::pow(std::numbers::e, -participants / desired + 1)
@@ -144,6 +148,10 @@ int Agent::reward_submodular(int task)
 
     participants = partitions[task].size();
     epsilon = tasks[task].get_modifier();
+
+    // add 1 to any task agent is not assigned to, simulate joining
+    if(task != this->task)
+        participants++;
 
     return tasks[task].get_reward() *
            (std::log(participants + epsilon - 1) / std::log(epsilon))  // log(n) / log(base)
