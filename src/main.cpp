@@ -1,8 +1,68 @@
+#include <argp.h>
+
 #include <iostream>
 
 #include "agent.hpp"
 
-int main(void)
+const char *argp_program_version = "Version 0.1";
+const char *argp_program_bug_address = "@unf.edu";
+
+// command line arguments
+struct args
 {
+    int agents;
+    int tasks;
+    Point dim;
+};
+
+// help menu
+static struct argp_option options[] = {
+    {0,0,0,0,"Optional arguments:",1},
+    {"agents",'a',"5",0," Number of agents, min 5 ",2},
+    {"tasks",'t',"2",0," Number of tasks, min 2 ",2},
+    {0,0,0,0,"GNU Options:", 2},
+    {0,0,0,0,0,0}
+};
+
+/**
+ * Parse command line options
+ *
+ * @key the integer key provided by the current option to the option parser.
+ * @arg the name of an argument associated with this option
+ * @state points to a struct argp_state
+ *
+ * @return ARGP_ERR_UNKNOWN for any key value not recognize
+ */
+static error_t parse_opt(int key, char *arg, struct argp_state *state) {
+
+    struct args *args = (struct args*)state->input;
+
+    switch(key) {
+        case 'a':
+            args->agents = arg ? atoi (arg) : 5;
+            break;
+        case 't':
+            args->tasks = arg ? atoi (arg) : 2;
+            break;
+        default:
+            return ARGP_ERR_UNKNOWN;
+    }
+    return(0);
+}
+
+#pragma GCC diagnostic ignored "-Wmissing-field-initializers"
+static struct argp argp	 =  { options, parse_opt };
+
+int main(int argc, char* argv[])
+{
+    struct args args;
+
+    // default arguments
+    args.agents = 0;
+    args.tasks = 0;
+
+    // parse command line options
+    argp_parse (&argp, argc, argv, 0, 0, &args);
+
     std::cout << "I serve no purpose!" << std::endl;
 }
