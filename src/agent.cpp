@@ -48,8 +48,8 @@ void Agent::decision()
                 }
             }
 
-            // temp conditional replace with commented conditional code
-            if(utility_max > utility_cur) // t_j∗, |S_j∗|) >_i (t_{Πi(i)} , |S_{Πi (i)}|)
+            // ≻ strongly preferred preference of max over current
+            if(utility_max > utility_cur) // t_j∗, |S_j∗|) ≻_i (t_{Πi(i)} , |S_{Πi (i)}|)
             {
                 // leave the current coalition (may need new structure O(N) operation)
                 partitions[task].erase(
