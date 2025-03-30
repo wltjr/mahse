@@ -23,7 +23,6 @@ void Agent::decision()
     iterations = 0;
     seed = 0;
     utility_cur = std::numeric_limits<int>::min();
-    utility_max = utility_cur;
     tasks_size = tasks.size();
     // empty partition, vector of agent vectors
     // create empty coalitions S_j for all task t_j
@@ -35,6 +34,8 @@ void Agent::decision()
         // Make a new decision if necessary
         if(!satisfied)
         {
+            utility_max = 0;
+
             // get the max utility for a given task and participants
             for(int j = 0; j < tasks_size; j++) //(t_j∗, |S_j∗|) = max ∀S j ∈Πi (t_j , |S_j ∪ {a_i}|)
             {
