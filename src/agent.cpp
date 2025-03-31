@@ -54,12 +54,12 @@ void Agent::decision()
             {
                 // leave the current coalition (may need new structure O(N) operation)
                 partitions[task].erase(
-                    std::find(partitions[task].begin(), partitions[task].end(), this));
+                    std::find(partitions[task].begin(), partitions[task].end(), id));
                 task = task_max;
                 utility_cur = utility_max;
 
                 // Join S_j∗ and update Π
-                partitions[task].push_back(this);
+                partitions[task].push_back(id);
                 iterations++;
 
                 std::random_device rd;
@@ -75,7 +75,7 @@ void Agent::decision()
 
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
-        std::vector<std::tuple<int, float, std::vector<std::vector<Agent *>>, bool>> msgs;
+        std::vector<std::tuple<int, float, std::vector<std::vector<int>>, bool>> msgs;
 
         // {r^i , s^i , Π^i }, satisfied = decision_mutex(M^i_rcv)
         const auto msg = decision_mutex(msgs);
@@ -87,8 +87,8 @@ void Agent::decision()
 }
 
 
-std::tuple<int, float, std::vector<std::vector<Agent *>>, bool> Agent::decision_mutex(
-    std::vector<std::tuple<int, float, std::vector<std::vector<Agent *>>, bool>> msgs
+std::tuple<int, float, std::vector<std::vector<int>>, bool> Agent::decision_mutex(
+    std::vector<std::tuple<int, float, std::vector<std::vector<int>>, bool>> msgs
 )
 {
     satisfied = true;
@@ -96,7 +96,7 @@ std::tuple<int, float, std::vector<std::vector<Agent *>>, bool> Agent::decision_
     {
         int r_k;
         float s_k;
-        std::vector<std::vector<Agent *>> p_k;
+        std::vector<std::vector<int>> p_k;
 
         r_k = std::get<0>(msg);
         s_k = std::get<1>(msg);
