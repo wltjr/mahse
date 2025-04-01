@@ -77,16 +77,5 @@ class Agent
          * @brief Decentralized decision-making algorithm
          */
         void decision();
-
-        /**
-         * @brief Distributed Mutex Subroutine
-         * 
-         * @param msgs a vector of tuples, (iterations, seed, partition, satisfied)
-         * 
-         * @return a tuple (iterations, seed, partition, satisfied)
-         */
-        std::tuple<int, float, std::vector<std::vector<int>>, bool> decision_mutex(
-            std::vector<std::tuple<int, float, std::vector<std::vector<int>>, bool>> msgs
-        );
 };
 #endif
