@@ -16,7 +16,7 @@ endif()
 ################################################################################
 # Find packages and libraries dependencies
 ################################################################################
-#find_package(MPI REQUIRED)
+find_package(MPI REQUIRED)
 
 
 ################################################################################
@@ -28,4 +28,4 @@ include_directories(src)
 add_executable(mahse src/main.cpp src/agent.cpp src/task.cpp)
 
 # link executable binaries to shared object libraries
-#target_link_libraries(some.exe PUBLIC MPI::MPI_CXX)
+target_link_libraries(mahse PUBLIC MPI::MPI_CXX)
