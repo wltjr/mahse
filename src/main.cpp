@@ -1,4 +1,5 @@
 #include <argp.h>
+#include <mpi.h>
 
 #include <iostream>
 
@@ -55,6 +56,9 @@ static struct argp argp	 =  { options, parse_opt };
 
 int main(int argc, char* argv[])
 {
+    int rank;
+    int size;
+    double timer;
     struct args args;
 
     // default arguments
@@ -64,5 +68,22 @@ int main(int argc, char* argv[])
     // parse command line options
     argp_parse (&argp, argc, argv, 0, 0, &args);
 
+    // Initialize MPI
+    MPI_Init(NULL, NULL);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    if (rank == 0)
+        // get MPI wall time
+        timer = MPI_Wtime();
+
     std::cout << "I serve no purpose!" << std::endl;
+
+    if (rank == 0)
+    {
+        timer = MPI_Wtime() - timer;
+        std::cout << "Elapsed time: " << timer << "s" << std::endl;
+    }
+
+    MPI_Finalize();
 }
