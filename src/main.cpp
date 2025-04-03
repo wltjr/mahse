@@ -71,9 +71,9 @@ int main(int argc, char* argv[])
     std::vector<Task> tasks;
 
     // default arguments
-    args.agents = 2;
+    args.agents = 5;
     args.dim = 500;
-    args.tasks = 5;
+    args.tasks = 2;
 
     // parse command line options
     argp_parse (&argp, argc, argv, 0, 0, &args);
