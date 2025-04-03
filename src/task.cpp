@@ -27,8 +27,6 @@ int Task::get_reward()
     return(reward);
 }
 
-#include <iostream>
-
 void Task::pack(char *buffer, int size, int &position, MPI_Comm comm)
 {
     MPI_Pack(&id, 1, MPI_INT, buffer, size, &position, comm);
