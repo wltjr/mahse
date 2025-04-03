@@ -2,6 +2,7 @@
 #include <mpi.h>
 
 #include <iostream>
+#include <random>
 
 #include "agent.hpp"
 
@@ -60,10 +61,15 @@ static struct argp argp	 =  { options, parse_opt };
 
 int main(int argc, char* argv[])
 {
+    const int BUFFER_SIZE = 1024;
+    char buffer[BUFFER_SIZE];
     int rank;
     int size;
+    int position;
     double timer;
     struct args args;
+    std::vector<Task> tasks;
+    std::vector<Task> received_tasks;
 
     // default arguments
     args.agents = 2;
@@ -79,10 +85,64 @@ int main(int argc, char* argv[])
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     if (rank == 0)
+    {
         // get MPI wall time
         timer = MPI_Wtime();
 
-    std::cout << "I serve no purpose!" << std::endl;
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<> urd1(0, args.dim);
+        std::uniform_real_distribution<> urd2(0, 10);
+        for(int i = 0; i < args.tasks; i++)
+        {
+            int reward;
+            int modifier;
+            Point coords;
+
+            coords.x = urd1(gen);
+            coords.y = urd1(gen);
+            reward = urd2(gen);
+            modifier = urd2(gen);
+
+            tasks.emplace_back(i+1, coords, reward, modifier);
+        }
+
+        std::cout << "Initial tasks:\n";
+        for (auto& task : tasks) {
+            std::cout << "Id: " << task.get_id()
+                      << ", Coords: (" << task.get_coords().x << ',' << task.get_coords().y
+                      << "), Reward: " << task.get_reward()
+                      << ", Modifier: " << task.get_modifier() << std::endl;
+        }
+    }
+
+    // Broadcast the size of the vector
+    MPI_Bcast(&args.tasks, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+    // Root packs the data
+    position = 0;
+    if (rank == 0)
+    {
+        for (auto& task : tasks)
+            task.pack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
+    }
+
+    // Broadcast the packed data length
+    MPI_Bcast(&position, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+    // All processes unpack the data
+    received_tasks.resize(args.tasks);
+    position = 0;
+    for (int i = 0; i < args.tasks; ++i)
+        received_tasks[i].unpack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
+
+    std::cout << "Process " << rank << " received:\n";
+    for (auto& task : received_tasks) {
+        std::cout << "Id: " << task.get_id()
+                  << ", Coords: (" << task.get_coords().x << ',' << task.get_coords().y
+                  << "), Reward: " << task.get_reward()
+                  << ", Modifier: " << task.get_modifier() << std::endl;
+    }
 
     if (rank == 0)
     {
