@@ -1,6 +1,8 @@
 #ifndef TASK_HPP
 #define TASK_HPP
 
+#include <mpi.h>
+
 #include "point.hpp"
 
 class Task
@@ -53,6 +55,26 @@ class Task
          * @brief Destroy the Task object, empty/unused
          */
         virtual ~Task();
+
+        /**
+         * @brief Pack a class instance into contiguous memory for MPI
+         *
+         * @param buffer pointer to char buffer used to store instance
+         * @param size buffer size, in bytes (non-negative integer)
+         * @param position current position in buffer, in bytes (integer)
+         * @param comm 	communicator for packed message (handle)
+         */
+        void pack(char *buffer, int size, int &position, MPI_Comm comm);
+
+        /**
+         * @brief Unpack a class instance stored contiguous memory from MPI
+         *
+         * @param buffer pointer to char buffer used to store instance
+         * @param size buffer size, in bytes (non-negative integer)
+         * @param position current position in buffer, in bytes (integer)
+         * @param comm 	communicator for packed message (handle)
+         */
+        void unpack(char *buffer, int size, int &position, MPI_Comm comm);
 
     private:
         int id;
