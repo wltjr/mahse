@@ -12,14 +12,15 @@ const char *argp_program_bug_address = "@unf.edu";
 struct args
 {
     int agents;
+    int dim;
     int tasks;
-    Point dim;
 };
 
 // help menu
 static struct argp_option options[] = {
     {0,0,0,0,"Optional arguments:",1},
     {"agents",'a',"5",0," Number of agents, min 5 ",2},
+    {"dimension",'d',"500",0," Grid dimensions, e.g. 500 ",2},
     {"tasks",'t',"2",0," Number of tasks, min 2 ",2},
     {0,0,0,0,"GNU Options:", 2},
     {0,0,0,0,0,0}
@@ -42,6 +43,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
         case 'a':
             args->agents = arg ? atoi (arg) : 5;
             break;
+        case 'd':
+            args->agents = arg ? atoi (arg) : 500;
+            break;
         case 't':
             args->tasks = arg ? atoi (arg) : 2;
             break;
@@ -62,8 +66,9 @@ int main(int argc, char* argv[])
     struct args args;
 
     // default arguments
-    args.agents = 0;
-    args.tasks = 0;
+    args.agents = 2;
+    args.dim = 500;
+    args.tasks = 5;
 
     // parse command line options
     argp_parse (&argp, argc, argv, 0, 0, &args);
