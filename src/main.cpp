@@ -69,7 +69,6 @@ int main(int argc, char* argv[])
     double timer;
     struct args args;
     std::vector<Task> tasks;
-    std::vector<Task> received_tasks;
 
     // default arguments
     args.agents = 2;
@@ -127,17 +126,21 @@ int main(int argc, char* argv[])
             task.pack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
     }
 
-    // Broadcast the packed data length
+    // Broadcast the packed data length and data
     MPI_Bcast(&position, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&buffer, position, MPI_INT, 0, MPI_COMM_WORLD);
 
-    // All processes unpack the data
-    received_tasks.resize(args.tasks);
-    position = 0;
-    for (int i = 0; i < args.tasks; ++i)
-        received_tasks[i].unpack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
+    // All processes except root unpack the data
+    if (rank !=0 )
+    {
+        tasks.resize(args.tasks);
+        position = 0;
+        for (int i = 0; i < args.tasks; i++)
+            tasks[i].unpack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
+    }
 
     std::cout << "Process " << rank << " received:\n";
-    for (auto& task : received_tasks) {
+    for (auto& task : tasks) {
         std::cout << "Id: " << task.get_id()
                   << ", Coords: (" << task.get_coords().x << ',' << task.get_coords().y
                   << "), Reward: " << task.get_reward()
