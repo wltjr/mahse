@@ -69,6 +69,8 @@ int main(int argc, char* argv[])
     double timer;
     struct args args;
     std::vector<Task> tasks;
+    Agent agent;
+    Point coords;
 
     // random functions
     std::random_device rd;
@@ -95,12 +97,11 @@ int main(int argc, char* argv[])
 
         std::uniform_real_distribution<> urd2(5, 10);
         std::uniform_real_distribution<> urd3(2, 3);
-
+    
         for(int i = 0; i < args.tasks; i++)
         {
             int reward;
             int modifier;
-            Point coords;
 
             coords.x = urd1(gen);
             coords.y = urd1(gen);
@@ -142,6 +143,12 @@ int main(int argc, char* argv[])
         for (int i = 0; i < args.tasks; i++)
             tasks[i].unpack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
     }
+
+    coords.x = urd1(gen);
+    coords.y = urd1(gen);
+
+    agent = Agent(rank + 1, size, coords, tasks, Agent::submodular);
+    agent.decision();
 
     if (rank == 0)
     {
