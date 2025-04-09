@@ -37,6 +37,16 @@ class Agent
         int distance(int task);
 
         /**
+         * @brief Pack a class instance into contiguous memory for MPI
+         *
+         * @param buffer pointer to char buffer used to store instance
+         * @param size buffer size, in bytes (non-negative integer)
+         * @param position current position in buffer, in bytes (integer)
+         * @param comm 	communicator for packed message (handle)
+         */
+        void pack_msg(char *buffer, int size, int &position, MPI_Comm comm);
+
+        /**
          * @brief Peaked-reward function
          *
          * @param task the task index number, e.g. the j in (t_j, S_j)
