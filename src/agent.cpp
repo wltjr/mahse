@@ -25,6 +25,7 @@ void Agent::decision()
     satisfied = false;
     iterations = 0;
     seed = 0;
+    task = 0;
     utility_cur = std::numeric_limits<int>::min();
     tasks_size = tasks.size();
     // empty partition, vector of agent vectors
