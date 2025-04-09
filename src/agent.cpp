@@ -13,6 +13,9 @@ Agent::~Agent() = default;
 
 void Agent::decision()
 {
+    const int BUFFER_SIZE = 1024;
+    char buffer_snd[BUFFER_SIZE];
+    int position;
     int task_max;
     int tasks_size;
     int utility_cur;
@@ -72,6 +75,8 @@ void Agent::decision()
 
         // Broadcast the local information to neighbor agents
         // Broadcast M^i = {r^i , s^i , Π^i } and receive M^k from its neighbors ∀a_k ∈ N_i
+        position = 0;
+        pack_msg(buffer_snd, BUFFER_SIZE, position, MPI_COMM_WORLD);
 
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
@@ -162,4 +167,26 @@ int Agent::utility(int task)
     }
 
     return value - distance(task);
+}
+
+void Agent::pack_msg(char *buffer, int size, int &position, MPI_Comm comm)
+{
+    int tasks_size;
+
+    tasks_size = tasks.size();
+    MPI_Pack(&iterations, 1, MPI_INT, buffer, size, &position, comm);
+    MPI_Pack(&seed, 1, MPI_FLOAT, buffer, size, &position, comm);
+    // pack partition coalitions only, we know the partition size, same as tasks
+    for(int i = 0; i < tasks_size; i++)
+    {
+        int coalition_size;
+
+        coalition_size = partitions[i].size();
+        // pack size of coalition, then each agent id in the coalition
+        MPI_Pack(&coalition_size, 1, MPI_INT, buffer, size, &position, comm);
+        for(int  j = 0; j < coalition_size; j++)
+            MPI_Pack(&partitions[i][j], 1, MPI_INT, buffer, size, &position, comm);
+    }
+
+    MPI_Pack(&tasks_size, 1, MPI_INT, buffer, size, &position, comm);
 }
