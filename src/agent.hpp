@@ -23,11 +23,12 @@ class Agent
          * @brief Construct a new Agent object
          *
          * @param id the task id
+         * @param agents the number of agents
          * @param coords the task coordinates (x,y)
          * @param tasks vector of tasks
          * @param reward the reward heuristic to use
          */
-        Agent(int id, Point coords, std::vector<Task> &tasks, rewards reward);
+        Agent(int id, int agents, Point coords, std::vector<Task> &tasks, rewards reward);
 
         /**
          * @brief Euclidean distance between task and agent
@@ -74,6 +75,7 @@ class Agent
 
     private:
         int id;
+        int agents;
         Point coords;
         bool satisfied;
         std::vector<std::vector<int>> partitions;  // Π
