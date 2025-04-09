@@ -48,6 +48,17 @@ class Agent
         void pack_msg(char *buffer, int size, int &position, MPI_Comm comm);
 
         /**
+         * @brief Unpack a class instance stored contiguous memory from MPI
+         *
+         * @param buffer pointer to char buffer used to store instance
+         * @param size buffer size, in bytes (non-negative integer)
+         * @param position current position in buffer, in bytes (integer)
+         * @param comm 	communicator for packed message (handle)
+         */
+        std::vector<std::tuple<int, float, std::vector<std::vector<int>>>>
+            unpack_msgs(char *buffer, int size, int &position, MPI_Comm comm);
+
+        /**
          * @brief Peaked-reward function
          *
          * @param task the task index number, e.g. the j in (t_j, S_j)
