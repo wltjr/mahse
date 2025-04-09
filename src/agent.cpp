@@ -192,3 +192,35 @@ void Agent::pack_msg(char *buffer, int size, int &position, MPI_Comm comm)
 
     MPI_Pack(&tasks_size, 1, MPI_INT, buffer, size, &position, comm);
 }
+
+std::vector<std::tuple<int, float, std::vector<std::vector<int>>>>
+    Agent::unpack_msgs(char *buffer, int size, int &position, MPI_Comm comm)
+{
+    int tasks_size;
+    std::vector<std::tuple<int, float, std::vector<std::vector<int>>>> msgs;
+
+    tasks_size = tasks.size();
+    for(int a = 0; a < agents; a++)
+    {
+        int r_k;
+        float s_k;
+        std::vector<std::vector<int>> p_k;
+
+        p_k.resize(tasks_size);
+        MPI_Unpack(buffer, size, &position, &r_k, 1, MPI_INT, comm);
+        MPI_Unpack(buffer, size, &position, &s_k, 1, MPI_FLOAT, comm);
+        // unpack partition coalitions only, we know the partition size, same as tasks
+        for(int i = 0; i < tasks_size; i++)
+        {
+            int coalition_size;
+
+            // unpack size of coalition, then each agent id in the coalition
+            MPI_Unpack(buffer, size, &position, &coalition_size, 1, MPI_INT, comm);
+            p_k[i].resize(coalition_size);
+            for(int  j = 0; j < coalition_size; j++)
+                MPI_Unpack(buffer, size, &position, &p_k[i][j], 1, MPI_INT, comm);
+        }
+        msgs.push_back(std::make_tuple(r_k, s_k, p_k));
+    }
+    return msgs;
+}
