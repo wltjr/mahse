@@ -14,7 +14,9 @@ Agent::~Agent() = default;
 void Agent::decision()
 {
     const int BUFFER_SIZE = 1024;
-    char buffer_snd[BUFFER_SIZE];
+    const int BUFFER_SIZE_REC = BUFFER_SIZE * agents;
+    char buffer_snd[BUFFER_SIZE] = {'0'};
+    char buffer_rec[BUFFER_SIZE_REC] = {'0'};
     int position;
     int task_max;
     int tasks_size;
@@ -75,14 +77,19 @@ void Agent::decision()
             satisfied = true;
         }
 
-        // Broadcast the local information to neighbor agents
         // Broadcast M^i = {r^i , s^i , Π^i } and receive M^k from its neighbors ∀a_k ∈ N_i
         position = 0;
         pack_msg(buffer_snd, BUFFER_SIZE, position, MPI_COMM_WORLD);
 
+        // Broadcast the local information to neighbor agents & receive message
+        MPI_Allgather(buffer_snd, position, MPI_CHAR,
+                      buffer_rec, position * agents, MPI_CHAR, MPI_COMM_WORLD);
+
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
-        std::vector<std::tuple<int, float, std::vector<std::vector<int>>, bool>> msgs;
+        position = 0;
+        std::vector<std::tuple<int, float, std::vector<std::vector<int>>>> msgs =
+            unpack_msgs(buffer_rec, BUFFER_SIZE_REC, position, MPI_COMM_WORLD);
 
         // {r^i , s^i , Π^i }, satisfied = decision_mutex(M^i_rcv)
         // inlined decision_mutex(), no reason for a separate function/method
