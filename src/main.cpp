@@ -139,14 +139,6 @@ int main(int argc, char* argv[])
             tasks[i].unpack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
     }
 
-    std::cout << "Process " << rank << " received:\n";
-    for (auto& task : tasks) {
-        std::cout << "Id: " << task.get_id()
-                  << ", Coords: (" << task.get_coords().x << ',' << task.get_coords().y
-                  << "), Reward: " << task.get_reward()
-                  << ", Modifier: " << task.get_modifier() << std::endl;
-    }
-
     if (rank == 0)
     {
         timer = MPI_Wtime() - timer;
