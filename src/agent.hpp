@@ -31,6 +31,11 @@ class Agent
         Agent(int id, int agents, Point coords, std::vector<Task> &tasks, rewards reward);
 
         /**
+         * @brief Decentralized decision-making algorithm
+         */
+        void decision();
+
+        /**
          * @brief Euclidean distance between task and agent
          *
          * @param task the task index number, e.g. the j in (t_j, S_j)
@@ -95,10 +100,5 @@ class Agent
         float seed; // s [0,1] uniform-random variable
         int reward;
         int task; // the task index number, e.g. the j in (t_j, S_j)
-
-        /**
-         * @brief Decentralized decision-making algorithm
-         */
-        void decision();
 };
 #endif
