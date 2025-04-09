@@ -70,6 +70,11 @@ int main(int argc, char* argv[])
     struct args args;
     std::vector<Task> tasks;
 
+    // random functions
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> urd1(0, args.dim);
+
     // default arguments
     args.agents = 5;
     args.dim = 500;
@@ -88,10 +93,9 @@ int main(int argc, char* argv[])
         // get MPI wall time
         timer = MPI_Wtime();
 
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_real_distribution<> urd1(0, args.dim);
-        std::uniform_real_distribution<> urd2(0, 10);
+        std::uniform_real_distribution<> urd2(5, 10);
+        std::uniform_real_distribution<> urd3(2, 3);
+
         for(int i = 0; i < args.tasks; i++)
         {
             int reward;
@@ -101,7 +105,7 @@ int main(int argc, char* argv[])
             coords.x = urd1(gen);
             coords.y = urd1(gen);
             reward = urd2(gen);
-            modifier = urd2(gen);
+            modifier = urd3(gen);
 
             tasks.emplace_back(i+1, coords, reward, modifier);
         }
