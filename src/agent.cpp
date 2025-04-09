@@ -56,8 +56,9 @@ void Agent::decision()
             if(utility_max > utility_cur) // t_j∗, |S_j∗|) ≻_i (t_{Πi(i)} , |S_{Πi (i)}|)
             {
                 // leave the current coalition (may need new structure O(N) operation)
-                partitions[task].erase(
-                    std::find(partitions[task].begin(), partitions[task].end(), id));
+                auto itr = std::find(partitions[task].begin(), partitions[task].end(), id);
+                if(itr != partitions[task].end())
+                    partitions[task].erase(itr);
                 task = task_max;
                 utility_cur = utility_max;
 
