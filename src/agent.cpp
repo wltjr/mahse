@@ -6,8 +6,8 @@
 
 Agent::Agent() = default;
 
-Agent::Agent(int id, Point coords, std::vector<Task> &tasks, rewards reward) :
-    id(id), coords(coords), tasks(tasks), reward(reward) {};
+Agent::Agent(int id, int agents, Point coords, std::vector<Task> &tasks, rewards reward) :
+    id(id), agents(agents), coords(coords), tasks(tasks), reward(reward) {};
 
 Agent::~Agent() = default;
 
