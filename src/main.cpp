@@ -97,6 +97,11 @@ int main(int argc, char* argv[])
 
         std::uniform_real_distribution<> urd2(5, 10);
         std::uniform_real_distribution<> urd3(2, 3);
+
+        coords.x = 0;
+        coords.y = 0;
+
+        tasks.emplace_back(0, coords, 0, 0);
     
         for(int i = 0; i < args.tasks; i++)
         {
@@ -119,6 +124,9 @@ int main(int argc, char* argv[])
                       << ", Modifier: " << task.get_modifier() << std::endl;
         }
     }
+
+    // Add null task to count
+    args.tasks++;
 
     // Broadcast the size of the vector
     MPI_Bcast(&args.tasks, 1, MPI_INT, 0, MPI_COMM_WORLD);
