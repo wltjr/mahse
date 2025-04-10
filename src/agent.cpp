@@ -51,7 +51,7 @@ void Agent::decision()
             utility_max = 0;
 
             // get the max utility for a given task and participants
-            for(int j = 0; j < tasks_size; j++) //(t_j∗, |S_j∗|) = max ∀S j ∈Πi (t_j , |S_j ∪ {a_i}|)
+            for(int j = 1; j < tasks_size; j++) //(t_j∗, |S_j∗|) = max ∀S j ∈Πi (t_j , |S_j ∪ {a_i}|)
             {
                 int value;
 
