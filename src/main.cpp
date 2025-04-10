@@ -72,11 +72,6 @@ int main(int argc, char* argv[])
     Agent agent;
     Point coords;
 
-    // random functions
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> urd1(0, args.dim);
-
     // default arguments
     args.agents = 5;
     args.dim = 500;
@@ -84,6 +79,11 @@ int main(int argc, char* argv[])
 
     // parse command line options
     argp_parse (&argp, argc, argv, 0, 0, &args);
+
+    // random functions
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> urd1(0, args.dim);
 
     // Initialize MPI
     MPI_Init(NULL, NULL);
