@@ -39,6 +39,8 @@ void Agent::decision()
     // empty partition, vector of agent vectors
     // create empty coalitions S_j for all task t_j
     partitions.resize(tasks_size); // Π = {S_0 = A, S_j = ∅ ∀t_j ∈ T }
+    for(int i = 1; i <= agents; i++)
+        partitions[0].push_back(i);
 
     // Decision-making process begins
     while(true)
