@@ -23,6 +23,11 @@ void Agent::decision()
     int utility_cur;
     int utility_max;
 
+    // random functions
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> urd(0.0,1.0);
+
     // Initialization
     satisfied = false;
     iterations = 0;
@@ -68,10 +73,6 @@ void Agent::decision()
                 // Join S_j∗ and update Π
                 partitions[task].push_back(id);
                 iterations++;
-
-                std::random_device rd;
-                std::mt19937 gen(rd());
-                std::uniform_real_distribution<> urd(0.0,1.0);
                 seed = urd(gen);
             }
             satisfied = true;
