@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
             tasks.emplace_back(i+1, coords, reward, modifier);
         }
 
-        std::cout << "Initial tasks:\n";
+        std::cout << "Tasks:" << std::endl;
         for (auto& task : tasks) {
             std::cout << "Id: " << task.get_id()
                       << ", Coords: (" << task.get_coords().x << ',' << task.get_coords().y
@@ -124,6 +124,7 @@ int main(int argc, char* argv[])
                       << ", Modifier: " << task.get_modifier() << std::endl;
         }
     }
+    std::cout << std::endl;
 
     // Add null task to count
     args.tasks++;
