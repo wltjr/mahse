@@ -64,20 +64,6 @@ class Agent
             unpack_msgs(char *buffer, int size, int &position, MPI_Comm comm);
 
         /**
-         * @brief Peaked-reward function
-         *
-         * @param task the task index number, e.g. the j in (t_j, S_j)
-         */
-        int reward_peaked(int task);
-
-        /**
-         * @brief Submodular reward function
-         *
-         * @param task the task index number, e.g. the j in (t_j, S_j)
-         */
-        int reward_submodular(int task);
-
-        /**
          * @brief Utility function
          *
          * @param task the task index number, e.g. the j in (t_j, S_j)
