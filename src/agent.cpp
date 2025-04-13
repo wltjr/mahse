@@ -131,51 +131,32 @@ int Agent::distance(int task)
     return std::sqrt(x * x + y * y);
 }
 
-int Agent::reward_peaked(int task)
-{
-    int participants;
-    int desired;
-
-    participants = partitions[task].size();
-    desired = tasks[task].get_modifier();
-
-    // add 1 to any task agent is not assigned to, simulate joining
-    if(task != this->task)
-        participants++;
-
-    return (tasks[task].get_reward() * participants) / desired *
-            std::pow(std::exp(1.0), -participants / desired + 1);
-            // std::pow(std::numbers::e, -participants / desired + 1)
-}
-
-int Agent::reward_submodular(int task)
-{
-    int participants;
-    int epsilon;
-
-    participants = partitions[task].size();
-    epsilon = tasks[task].get_modifier();
-
-    // add 1 to any task agent is not assigned to, simulate joining
-    if(task != this->task)
-        participants++;
-
-    return tasks[task].get_reward() *
-           (std::log(participants + epsilon - 1) / std::log(epsilon))  // log(n) / log(base)
-           / participants;
-}
-
 int Agent::utility(int task)
 {
     int value;
+    int participants;
+    int modifier;
+
+    participants = partitions[task].size();
+    modifier = tasks[task].get_modifier();
+
+    // add 1 to any task agent is not assigned to, simulate joining
+    if(task != this->task)
+        participants++;
 
     switch(reward)
     {
+        // Peaked Reward
         case peaked:
-            value = reward_peaked(task);
+            value = (tasks[task].get_reward() * participants) / modifier *
+                     std::pow(std::exp(1.0), -participants / modifier + 1);
+                    // std::pow(std::numbers::e, -participants / desired + 1)
             break;
+        // Submodular Reward
         default:
-            value = reward_submodular(task);
+            value = tasks[task].get_reward() *
+                    (std::log(participants + modifier - 1) / std::log(modifier))  // log(n) / log(base)
+                    / participants;
             break;
     }
 
