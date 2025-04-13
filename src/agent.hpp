@@ -36,6 +36,23 @@ class Agent
         void decision();
 
         /**
+         * @brief Destroy the Agent object, empty/unused
+         */
+        virtual ~Agent();
+
+    private:
+        int id;
+        int agents;
+        Point coords;
+        bool satisfied;
+        std::vector<std::vector<int>> partitions;  // Π
+        std::vector<Task> tasks; // T
+        int iterations; // r
+        float seed; // s [0,1] uniform-random variable
+        int reward;
+        int task; // the task index number, e.g. the j in (t_j, S_j)
+
+        /**
          * @brief Euclidean distance between task and agent
          *
          * @param task the task index number, e.g. the j in (t_j, S_j)
@@ -69,22 +86,5 @@ class Agent
          * @param task the task index number, e.g. the j in (t_j, S_j)
          */
         int utility(int task);
-
-        /**
-         * @brief Destroy the Agent object, empty/unused
-         */
-        virtual ~Agent();
-
-    private:
-        int id;
-        int agents;
-        Point coords;
-        bool satisfied;
-        std::vector<std::vector<int>> partitions;  // Π
-        std::vector<Task> tasks; // T
-        int iterations; // r
-        float seed; // s [0,1] uniform-random variable
-        int reward;
-        int task; // the task index number, e.g. the j in (t_j, S_j)
 };
 #endif
