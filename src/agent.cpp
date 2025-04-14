@@ -87,7 +87,7 @@ void Agent::decision()
 
         // Broadcast the local information to neighbor agents & receive message
         MPI_Allgather(buffer_snd, position, MPI_CHAR,
-                      buffer_rec, position * agents, MPI_CHAR, MPI_COMM_WORLD);
+                      buffer_rec, position, MPI_CHAR, MPI_COMM_WORLD);
 
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
