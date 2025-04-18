@@ -48,7 +48,7 @@ class Agent
         std::vector<std::vector<int>> partitions;  // Π
         std::vector<Task> tasks; // T
         int iterations; // r
-        float seed; // s [0,1] uniform-random variable
+        double seed; // s [0,1] uniform-random variable
         int reward;
         int task; // the task index number, e.g. the j in (t_j, S_j)
 
@@ -77,7 +77,7 @@ class Agent
          * @param position current position in buffer, in bytes (integer)
          * @param comm 	communicator for packed message (handle)
          */
-        std::vector<std::tuple<int, float, std::vector<std::vector<int>>>>
+        std::vector<std::tuple<int, double, std::vector<std::vector<int>>>>
             unpack_msgs(char *buffer, int size, int &position, MPI_Comm comm);
 
         /**
