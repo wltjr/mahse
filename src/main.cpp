@@ -22,7 +22,7 @@ struct args
 static struct argp_option options[] = {
     {0,0,0,0,"Optional arguments:",1},
     {"agents",'a',"5",0," Number of agents, min 5 ",2},
-    {"dimension",'d',"500",0," Grid dimensions, e.g. 500 ",2},
+    {"dimension",'d',"1000",0," Grid dimensions, e.g. 1000 ",2},
     {"tasks",'t',"2",0," Number of tasks, min 2 ",2},
     {0,0,0,0,"GNU Options:", 2},
     {0,0,0,0,0,0}
@@ -46,7 +46,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
             args->agents = arg ? atoi (arg) : 5;
             break;
         case 'd':
-            args->agents = arg ? atoi (arg) : 500;
+            args->dim = arg ? atoi (arg) : 1000;
             break;
         case 't':
             args->tasks = arg ? atoi (arg) : 2;
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 
     // default arguments
     args.agents = 5;
-    args.dim = 500;
+    args.dim = 1000;
     args.tasks = 2;
 
     // parse command line options
