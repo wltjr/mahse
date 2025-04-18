@@ -95,7 +95,7 @@ void Agent::decision()
 
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
-        std::vector<std::tuple<int, float, std::vector<std::vector<int>>>> msgs =
+        std::vector<std::tuple<int, double, std::vector<std::vector<int>>>> msgs =
             unpack_msgs(&buffer_rec[0], BUFFER_SIZE_REC, position, MPI_COMM_WORLD);
 
         // {r^i , s^i , Π^i }, satisfied = decision_mutex(M^i_rcv)
@@ -104,7 +104,7 @@ void Agent::decision()
         for (auto &msg : msgs)
         {
             int r_k;
-            float s_k;
+            double s_k;
             std::vector<std::vector<int>> p_k;
 
             r_k = std::get<0>(msg);
@@ -214,7 +214,7 @@ void Agent::pack_msg(char *buffer, int size, int &position, MPI_Comm comm)
 
     tasks_size = tasks.size();
     MPI_Pack(&iterations, 1, MPI_INT, buffer, size, &position, comm);
-    MPI_Pack(&seed, 1, MPI_FLOAT, buffer, size, &position, comm);
+    MPI_Pack(&seed, 1, MPI_DOUBLE, buffer, size, &position, comm);
     // pack partition coalitions only, we know the partition size, same as tasks
     for(int i = 0; i < tasks_size; i++)
     {
@@ -230,24 +230,24 @@ void Agent::pack_msg(char *buffer, int size, int &position, MPI_Comm comm)
     MPI_Pack(&tasks_size, 1, MPI_INT, buffer, size, &position, comm);
 }
 
-std::vector<std::tuple<int, float, std::vector<std::vector<int>>>>
+std::vector<std::tuple<int, double, std::vector<std::vector<int>>>>
     Agent::unpack_msgs(char *buffer, int size, int &position, MPI_Comm comm)
 {
     int tasks_size;
-    std::vector<std::tuple<int, float, std::vector<std::vector<int>>>> msgs;
+    std::vector<std::tuple<int, double, std::vector<std::vector<int>>>> msgs;
 
     tasks_size = tasks.size();
     for(int a = 0; a < agents; a++)
     {
         int r_k;
         int pos;
-        float s_k;
+        double s_k;
         std::vector<std::vector<int>> p_k;
 
         pos = a * position;
         p_k.resize(tasks_size);
         MPI_Unpack(buffer, size, &pos, &r_k, 1, MPI_INT, comm);
-        MPI_Unpack(buffer, size, &pos, &s_k, 1, MPI_FLOAT, comm);
+        MPI_Unpack(buffer, size, &pos, &s_k, 1, MPI_DOUBLE, comm);
         // unpack partition coalitions only, we know the partition size, same as tasks
         for(int i = 0; i < tasks_size; i++)
         {
