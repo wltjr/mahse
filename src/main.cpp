@@ -117,12 +117,14 @@ int main(int argc, char* argv[])
             tasks.emplace_back(i+1, coords, reward, modifier);
         }
 
+        // Display tasks information
         std::cout << "Tasks:" << std::endl;
-        for (auto& task : tasks) {
-            std::cout << "Id: " << task.get_id()
-                      << ", Coords: (" << task.get_coords().x << ',' << task.get_coords().y
-                      << "), Reward: " << task.get_reward()
-                      << ", Modifier: " << task.get_modifier() << std::endl;
+        for (auto& task : tasks) 
+        {
+            std::cout <<
+                std::format("Id: {}, Coords: ({},{}), Reward: {}, Modifier: {}",
+                            task.get_id(), task.get_coords().x, task.get_coords().y,
+                            task.get_reward(), task.get_modifier()) << std::endl;
         }
     }
     std::cout << std::endl;
