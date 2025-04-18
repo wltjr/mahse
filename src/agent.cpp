@@ -113,6 +113,24 @@ void Agent::decision()
                 seed = s_k;
                 partitions = p_k;
                 satisfied = false;
+
+                // set agent's task and utility from partition coalition update
+                for(auto &t: tasks)
+                {
+                    int t_id;
+
+                    t_id = t.get_id();
+                    auto itr = std::find(partitions[t_id].begin(), partitions[t_id].end(), id);
+                    if(itr != partitions[t_id].end())
+                    {
+                        task = t_id;
+                        if(task == 0)
+                            utility_cur = std::numeric_limits<int>::min();
+                        else
+                            utility_cur = utility(t_id);
+                        break;
+                    }
+                }
             }
         }
     }
