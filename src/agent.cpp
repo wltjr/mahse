@@ -47,7 +47,7 @@ void Agent::decision()
         partitions[0].push_back(i);
 
     // Decision-making process begins
-    while(true)
+    for(int i = 0;i <= iterations; i++)
     {
         // Make a new decision if necessary
         if(!satisfied)
