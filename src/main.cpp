@@ -96,8 +96,8 @@ int main(int argc, char* argv[])
         // get MPI wall time
         timer = MPI_Wtime();
 
-        std::uniform_real_distribution<> urd2(5, 10);
-        std::uniform_real_distribution<> urd3(2, 3);
+        std::uniform_real_distribution<> urd2(2, 3);
+        std::uniform_real_distribution<> urd3(args.dim, args.dim + args.dim);
 
         coords.x = 0;
         coords.y = 0;
@@ -111,8 +111,9 @@ int main(int argc, char* argv[])
 
             coords.x = urd1(gen);
             coords.y = urd1(gen);
-            reward = urd2(gen);
-            modifier = urd3(gen);
+            modifier = urd2(gen);
+            reward = urd3(gen) *
+                    1 / (std::log(size / args.tasks + 1) / std::log(modifier));
 
             tasks.emplace_back(i+1, coords, reward, modifier);
         }
