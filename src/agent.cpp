@@ -1,7 +1,10 @@
 #include <algorithm>
 #include <array>
+#include <format>
+#include <iostream>
 #include <random>
 #include <limits>
+#include <sstream>
 
 #include "agent.hpp"
 
@@ -134,6 +137,30 @@ void Agent::decision()
                 }
             }
         }
+    }
+
+    // display final agent information
+    std::cout << std::format("Agent: {}, task: {}, utility: {}, iterations: {}",
+                             id, task, utility_cur, iterations) << std::endl;
+
+    MPI_Barrier(MPI_COMM_WORLD);
+    if(id == 1)
+    {
+        std::stringstream result;
+
+        result << "Final partition:" << std::endl;
+        for(int i = 0; i < tasks_size; i++)
+        {
+            int size;
+
+            size = partitions[i].size();
+            result << std::format("Coalition: {}, Size: {}, Agent Ids: ", i, size);
+            for(int  j = 0; j < size; j++)
+                result << partitions[i][j] << ',';
+            result << std::endl;
+        }
+
+        std::cout << result.str() << std::endl;
     }
 }
 
