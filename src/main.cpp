@@ -1,6 +1,7 @@
 #include <argp.h>
 #include <mpi.h>
 
+#include <format>
 #include <iostream>
 #include <random>
 
@@ -157,6 +158,16 @@ int main(int argc, char* argv[])
     coords.y = urd1(gen);
 
     agent = Agent(rank + 1, size, coords, tasks, Agent::submodular);
+
+    // Display agent information
+    if (rank == 0)
+        std::cout << "Agents:" << std::endl;
+    MPI_Barrier(MPI_COMM_WORLD);
+
+    std::cout << std::format("Id: {}, Coords: ({},{})",
+                             rank + 1, coords.x, coords.y) << std::endl;
+
+    // start algorithm
     agent.decision();
 
     if (rank == 0)
