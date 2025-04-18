@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
         }
 
         // Display tasks information
-        std::cout << "Tasks:" << std::endl;
+        std::cout << args.tasks << " Tasks:" << std::endl;
         for (auto& task : tasks) 
         {
             std::cout <<
@@ -126,8 +126,8 @@ int main(int argc, char* argv[])
                             task.get_id(), task.get_coords().x, task.get_coords().y,
                             task.get_reward(), task.get_modifier()) << std::endl;
         }
+        std::cout << std::endl;
     }
-    std::cout << std::endl;
 
     // Add null task to count
     args.tasks++;
@@ -163,11 +163,12 @@ int main(int argc, char* argv[])
 
     // Display agent information
     if (rank == 0)
-        std::cout << "Agents:" << std::endl;
-    MPI_Barrier(MPI_COMM_WORLD);
-
+        std::cout << size << " Agents:" << std::endl;
     std::cout << std::format("Id: {}, Coords: ({},{})",
                              rank + 1, coords.x, coords.y) << std::endl;
+    if (rank == 0)
+        std::cout << std::endl;
+    MPI_Barrier(MPI_COMM_WORLD);
 
     // start algorithm
     agent.decision();
