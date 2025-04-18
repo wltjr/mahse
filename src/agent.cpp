@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <random>
 #include <limits>
 
@@ -15,8 +16,8 @@ void Agent::decision()
 {
     const int BUFFER_SIZE = 1024;
     const int BUFFER_SIZE_REC = BUFFER_SIZE * agents;
-    char buffer_snd[BUFFER_SIZE] = {'0'};
-    char buffer_rec[BUFFER_SIZE_REC] = {'0'};
+    std::array<char, BUFFER_SIZE> buffer_snd = {'0'};
+    std::vector<char> buffer_rec(BUFFER_SIZE_REC, '0');
     int position;
     int task_max;
     int tasks_size;
@@ -83,16 +84,16 @@ void Agent::decision()
 
         // Broadcast M^i = {r^i , s^i , Π^i } and receive M^k from its neighbors ∀a_k ∈ N_i
         position = 0;
-        pack_msg(buffer_snd, BUFFER_SIZE, position, MPI_COMM_WORLD);
+        pack_msg(&buffer_snd[0], BUFFER_SIZE, position, MPI_COMM_WORLD);
 
         // Broadcast the local information to neighbor agents & receive message
-        MPI_Allgather(buffer_snd, position, MPI_CHAR,
-                      buffer_rec, position, MPI_CHAR, MPI_COMM_WORLD);
+        MPI_Allgather(&buffer_snd[0], position, MPI_CHAR,
+                      &buffer_rec[0], position, MPI_CHAR, MPI_COMM_WORLD);
 
         // Select the valid partition from all the received messages
         // Construct M^i_rcv = {M^i , ∀M^k }
         std::vector<std::tuple<int, float, std::vector<std::vector<int>>>> msgs =
-            unpack_msgs(buffer_rec, BUFFER_SIZE_REC, position, MPI_COMM_WORLD);
+            unpack_msgs(&buffer_rec[0], BUFFER_SIZE_REC, position, MPI_COMM_WORLD);
 
         // {r^i , s^i , Π^i }, satisfied = decision_mutex(M^i_rcv)
         // inlined decision_mutex(), no reason for a separate function/method
