@@ -15,6 +15,7 @@ struct args
 {
     int agents;
     int dim;
+    int reward;
     int tasks;
 };
 
@@ -23,6 +24,7 @@ static struct argp_option options[] = {
     {0,0,0,0,"Optional arguments:",1},
     {"agents",'a',"5",0," Number of agents, min 5 ",2},
     {"dimension",'d',"1000",0," Grid dimensions, e.g. 1000 ",2},
+    {"reward",'r',"1",0," Reward type 0 for peak and 1 for submodular reward, e.g. 1",2},
     {"tasks",'t',"2",0," Number of tasks, min 2 ",2},
     {0,0,0,0,"GNU Options:", 2},
     {0,0,0,0,0,0}
@@ -47,6 +49,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
             break;
         case 'd':
             args->dim = arg ? atoi (arg) : 1000;
+            break;
+        case 'r':
+            args->reward = arg ? atoi (arg) : Agent::submodular;
             break;
         case 't':
             args->tasks = arg ? atoi (arg) : 2;
@@ -76,6 +81,7 @@ int main(int argc, char* argv[])
     // default arguments
     args.agents = 5;
     args.dim = 1000;
+    args.reward = Agent::submodular;
     args.tasks = 2;
 
     // parse command line options
@@ -111,9 +117,18 @@ int main(int argc, char* argv[])
 
             coords.x = urd1(gen);
             coords.y = urd1(gen);
-            modifier = urd2(gen);
-            reward = urd3(gen) *
-                    1 / (std::log(size / args.tasks + 1) / std::log(modifier));
+            switch(args.reward)
+            {
+                case Agent::peaked:
+                    reward = urd3(gen) * size / args.tasks;
+                    modifier = size / args.tasks; // n^d_j rounded (r^max_j / ∑_{∀t_k∈T*} r^max_k) * n_a
+                    break;
+                default:
+                    modifier = urd2(gen);
+                    reward = urd3(gen) *
+                            1 / (std::log(size / args.tasks + 1) / std::log(modifier));
+                    break;
+            }
 
             tasks.emplace_back(i+1, coords, reward, modifier);
         }
