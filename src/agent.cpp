@@ -49,8 +49,7 @@ void Agent::decision()
     // Decision-making process begins
     for(int i = 0;i <= iterations; i++)
     {
-        // Make a new decision if necessary
-        if(!satisfied)
+        if(!satisfied) // Make a new decision if necessary
         {
             utility_max = std::numeric_limits<int>::min();
 
@@ -76,9 +75,7 @@ void Agent::decision()
                     partitions[task].erase(itr);
                 task = task_max;
                 utility_cur = utility_max;
-
-                // Join S_j∗ and update Π
-                partitions[task].push_back(id);
+                partitions[task].push_back(id); // Join S_j∗ and update Π
                 iterations++;
                 seed = urd(gen);
             }
@@ -107,11 +104,8 @@ void Agent::decision()
             double s_k;
             std::vector<std::vector<int>> p_k;
 
-            r_k = std::get<0>(msg);
-            s_k = std::get<1>(msg);
-            p_k = std::get<2>(msg);
-            if ((r_k > iterations ) ||
-                (r_k == iterations && s_k > seed))
+            tie(r_k, s_k, p_k) = msg;
+            if ((r_k > iterations ) || (r_k == iterations && s_k > seed))
             {
                 iterations = r_k;
                 seed = s_k;
