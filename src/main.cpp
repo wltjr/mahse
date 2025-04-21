@@ -24,12 +24,12 @@ struct args
 // help menu
 static struct argp_option options[] = {
     {0,0,0,0,"Optional arguments:",1},
-    {"agents",'a',"5",0," Number of agents, min 5 ",2},
-    {"dimension",'d',"1000",0," Grid dimensions, e.g. 1000 ",2},
-    {"modifier",'m',"2",0," Reward modifier integer, random if unset ",2},
-    {"reward",'r',"10",0," Reward value integer, random if unset ",2},
-    {"tasks",'t',"2",0," Number of tasks, min 2 ",2},
-    {"utility",'u',"0",0," Utility reward type 0 for peak and 1 for submodular reward, e.g. 1",2},
+    {"agents",'a',"5",0," Number of agents, min 5 ",1},
+    {"dimension",'d',"1000",0," Grid dimensions, e.g. 1000 ",1},
+    {"modifier",'m',"2",0," Reward modifier integer, random if unset ",1},
+    {"reward",'r',"10",0," Reward value integer, random if unset ",1},
+    {"tasks",'t',"2",0," Number of tasks, min 2 ",1},
+    {"utility",'u',"0",0," Utility reward type 0 for peak and 1 for submodular reward, e.g. 1",1},
     {0,0,0,0,"GNU Options:", 2},
     {0,0,0,0,0,0}
 };
