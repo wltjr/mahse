@@ -15,6 +15,8 @@ struct args
 {
     int agents;
     int dim;
+    int modifier;
+    int reward;
     int tasks;
     int utility;
 };
@@ -24,6 +26,8 @@ static struct argp_option options[] = {
     {0,0,0,0,"Optional arguments:",1},
     {"agents",'a',"5",0," Number of agents, min 5 ",2},
     {"dimension",'d',"1000",0," Grid dimensions, e.g. 1000 ",2},
+    {"modifier",'m',"2",0," Reward modifier integer, random if unset ",2},
+    {"reward",'r',"10",0," Reward value integer, random if unset ",2},
     {"tasks",'t',"2",0," Number of tasks, min 2 ",2},
     {"utility",'u',"0",0," Utility reward type 0 for peak and 1 for submodular reward, e.g. 1",2},
     {0,0,0,0,"GNU Options:", 2},
@@ -49,6 +53,12 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
             break;
         case 'd':
             args->dim = arg ? atoi (arg) : 1000;
+            break;
+        case 'm':
+            args->modifier = arg ? atoi (arg) : 0;
+            break;
+        case 'r':
+            args->reward = arg ? atoi (arg) : 0;
             break;
         case 't':
             args->tasks = arg ? atoi (arg) : 2;
@@ -81,8 +91,10 @@ int main(int argc, char* argv[])
     // default arguments
     args.agents = 5;
     args.dim = 1000;
-    args.utility = Agent::submodular;
+    args.modifier = 0;
+    args.reward = 0;
     args.tasks = 2;
+    args.utility = Agent::submodular;
 
     // parse command line options
     argp_parse (&argp, argc, argv, 0, 0, &args);
@@ -124,25 +136,27 @@ int main(int argc, char* argv[])
     
         for(int i = 0; i < args.tasks; i++)
         {
-            int reward;
-            int modifier;
-
             coords.x = urd1(gen);
             coords.y = urd1(gen);
-            switch(args.utility)
+
+            // random reward & modifier from paper if not specified
+            if(!args.reward && !args.modifier)
             {
-                case Agent::peaked:
-                    reward = urd3(gen) * size / args.tasks;
-                    modifier = size / args.tasks; // n^d_j rounded (r^max_j / ∑_{∀t_k∈T*} r^max_k) * n_a
-                    break;
-                default:
-                    modifier = urd2(gen);
-                    reward = urd3(gen) *
-                            1 / (std::log(size / args.tasks + 1) / std::log(modifier));
-                    break;
+                switch(args.utility)
+                {
+                    case Agent::peaked:
+                        args.reward = urd3(gen) * size / args.tasks;
+                        args.modifier = size / args.tasks; // n^d_j rounded (r^max_j / ∑_{∀t_k∈T*} r^max_k) * n_a
+                        break;
+                    default:
+                        args.modifier = urd2(gen);
+                        args.reward = urd3(gen) *
+                                1 / (std::log(size / args.tasks + 1) / std::log(args.modifier));
+                        break;
+                }
             }
 
-            tasks.emplace_back(i+1, coords, reward, modifier);
+            tasks.emplace_back(i+1, coords, args.reward, args.modifier);
         }
 
         // Display tasks information
