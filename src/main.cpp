@@ -13,7 +13,6 @@ const char *argp_program_bug_address = "@unf.edu";
 // command line arguments
 struct args
 {
-    int agents;
     int dim;
     int modifier;
     int reward;
@@ -24,7 +23,6 @@ struct args
 // help menu
 static struct argp_option options[] = {
     {0,0,0,0,"Optional arguments:",1},
-    {"agents",'a',"5",0," Number of agents, min 5 ",1},
     {"dimension",'d',"1000",0," Grid dimensions, e.g. 1000 ",1},
     {"modifier",'m',"2",0," Reward modifier integer, random if unset ",1},
     {"reward",'r',"10",0," Reward value integer, random if unset ",1},
@@ -48,9 +46,6 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
     struct args *args = (struct args*)state->input;
 
     switch(key) {
-        case 'a':
-            args->agents = arg ? atoi (arg) : 5;
-            break;
         case 'd':
             args->dim = arg ? atoi (arg) : 1000;
             break;
@@ -89,7 +84,6 @@ int main(int argc, char* argv[])
     Point coords;
 
     // default arguments
-    args.agents = 5;
     args.dim = 1000;
     args.modifier = 0;
     args.reward = 0;
