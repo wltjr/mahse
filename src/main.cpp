@@ -15,8 +15,8 @@ struct args
 {
     int agents;
     int dim;
-    int reward;
     int tasks;
+    int utility;
 };
 
 // help menu
@@ -24,8 +24,8 @@ static struct argp_option options[] = {
     {0,0,0,0,"Optional arguments:",1},
     {"agents",'a',"5",0," Number of agents, min 5 ",2},
     {"dimension",'d',"1000",0," Grid dimensions, e.g. 1000 ",2},
-    {"reward",'r',"1",0," Reward type 0 for peak and 1 for submodular reward, e.g. 1",2},
     {"tasks",'t',"2",0," Number of tasks, min 2 ",2},
+    {"utility",'u',"0",0," Utility reward type 0 for peak and 1 for submodular reward, e.g. 1",2},
     {0,0,0,0,"GNU Options:", 2},
     {0,0,0,0,0,0}
 };
@@ -50,11 +50,11 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
         case 'd':
             args->dim = arg ? atoi (arg) : 1000;
             break;
-        case 'r':
-            args->reward = arg ? atoi (arg) : Agent::submodular;
-            break;
         case 't':
             args->tasks = arg ? atoi (arg) : 2;
+            break;
+        case 'u':
+            args->utility = arg ? atoi (arg) : Agent::submodular;
             break;
         default:
             return ARGP_ERR_UNKNOWN;
@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
     // default arguments
     args.agents = 5;
     args.dim = 1000;
-    args.reward = Agent::submodular;
+    args.utility = Agent::submodular;
     args.tasks = 2;
 
     // parse command line options
@@ -108,6 +108,18 @@ int main(int argc, char* argv[])
         coords.x = 0;
         coords.y = 0;
 
+        std::cout << "Reward Heuristic: ";
+        switch(args.utility)
+        {
+            case Agent::peaked:
+                std::cout << "Peaked-Reward";
+                break;
+            default:
+                std::cout << "Submodular";
+                break;
+        }
+        std::cout << std::endl;
+
         tasks.emplace_back(0, coords, 0, 0);
     
         for(int i = 0; i < args.tasks; i++)
@@ -117,7 +129,7 @@ int main(int argc, char* argv[])
 
             coords.x = urd1(gen);
             coords.y = urd1(gen);
-            switch(args.reward)
+            switch(args.utility)
             {
                 case Agent::peaked:
                     reward = urd3(gen) * size / args.tasks;
@@ -175,7 +187,7 @@ int main(int argc, char* argv[])
     coords.x = urd1(gen);
     coords.y = urd1(gen);
 
-    agent = Agent(rank + 1, size, coords, tasks, Agent::submodular);
+    agent = Agent(rank + 1, size, coords, tasks, static_cast<Agent::rewards>(args.utility));
 
     // Display agent information
     if (rank == 0)
