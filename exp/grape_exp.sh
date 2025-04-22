@@ -31,27 +31,27 @@ for a in $(seq 5 ${agents}); do
         avg_iter1=0
         avg_time0=0
         avg_time1=0
-        for i in $(seq $count); do
+        for i in $(seq ${count}); do
             file0="logs/agents${a}_tasks${t}_peaked_exp_${i}.log"
             file1="logs/agents${a}_tasks${t}_submodular_exp_${i}.log"
 
             ${mpi_cmd} -np ${a} ${my_cmd} -u 0 -r ${r0} -m ${m0} > ${file0}
             ${mpi_cmd} -np ${a} ${my_cmd} -u 1 -r ${r1} -m ${m1} > ${file1}
 
-            etime0=$(grep "Elapsed time" $file0 | cut -d ' ' -f 3)
-            etime1=$(grep "Elapsed time" $file1 | cut -d ' ' -f 3)
+            etime0=$(grep "Elapsed time" ${file0} | cut -d ' ' -f 3)
+            etime1=$(grep "Elapsed time" ${file1} | cut -d ' ' -f 3)
 
-            iter0=$(grep -m1 "iterations" $file0 | cut -d ' ' -f 8)
-            iter1=$(grep -m1 "iterations" $file1 | cut -d ' ' -f 8)
+            iter0=$(grep -m1 "iterations" ${file0} | cut -d ' ' -f 8)
+            iter1=$(grep -m1 "iterations" ${file1} | cut -d ' ' -f 8)
 
-            avg_iter0=$((${avg_iter0} + ${iter0}))
-            avg_iter1=$((${avg_iter1} + ${iter1}))
+            avg_iter0=$((avg_iter0 + iter0))
+            avg_iter1=$((avg_iter1 + iter1))
 
             avg_time0=$(bc -l <<< "${avg_time0} + ${etime0/s/}")
             avg_time1=$(bc -l <<< "${avg_time1} + ${etime1/s/}")
         done
-        avg_iter0=$((${avg_iter0} / ${count}))
-        avg_iter1=$((${avg_iter1} / ${count}))
+        avg_iter0=$((avg_iter0 / count))
+        avg_iter1=$((avg_iter1 / count))
 
         avg_time0=$(bc -l <<< "${avg_time0} / ${count}")
         avg_time1=$(bc -l <<< "${avg_time1} / ${count}")
