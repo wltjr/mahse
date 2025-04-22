@@ -9,7 +9,7 @@ r1=10		# reward
 m1=2		# design param
 
 # simulation and experiments
-dim=500     # grid dimensions
+dim=250     # grid dimensions
 agents=28   # max number of agents to test, starts at 5
 tasks=5     # number of tasks to test, starts at 2
 count=5 	# loop iterations
@@ -39,6 +39,9 @@ for a in $(seq 5 ${agents}); do
 
             ${mpi_cmd} -np ${a} ${my_cmd} -u 0 -r ${r0} -m ${m0} > ${file0}
             ${mpi_cmd} -np ${a} ${my_cmd} -u 1 -r ${r1} -m ${m1} > ${file1}
+
+            # ${mpi_cmd} -np ${a} ${my_cmd} -u 0 -r ${r0} -m ${m0} > ${file0}
+            # ${mpi_cmd} -np ${a} ${my_cmd} -u 1 -r ${r1} -m ${m1} > ${file1}
 
             etime0=$(grep "Elapsed time" ${file0} | cut -d ' ' -f 3)
             etime1=$(grep "Elapsed time" ${file1} | cut -d ' ' -f 3)
