@@ -1,0 +1,386 @@
+$ ./grape_exp.sh
+Running GRAPE Experiments
+
+Testing 5 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0003454892, Iterations: 5
+Submodular Elapsed time: 0.0003718400, Iterations: 5
+
+Testing 5 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0003559034, Iterations: 5
+Submodular Elapsed time: 0.0003557430, Iterations: 5
+
+Testing 5 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0003787172, Iterations: 5
+Submodular Elapsed time: 0.0003511542, Iterations: 5
+
+Testing 5 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0003456798, Iterations: 5
+Submodular Elapsed time: 0.0003731778, Iterations: 5
+
+Testing 6 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0004077512, Iterations: 6
+Submodular Elapsed time: 0.0004159138, Iterations: 6
+
+Testing 6 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0004532284, Iterations: 6
+Submodular Elapsed time: 0.0004093752, Iterations: 6
+
+Testing 6 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0004136190, Iterations: 6
+Submodular Elapsed time: 0.0004210318, Iterations: 6
+
+Testing 6 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0004209270, Iterations: 6
+Submodular Elapsed time: 0.0004250968, Iterations: 6
+
+Testing 7 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0006126568, Iterations: 7
+Submodular Elapsed time: 0.0006258636, Iterations: 7
+
+Testing 7 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0005223172, Iterations: 7
+Submodular Elapsed time: 0.0006568572, Iterations: 7
+
+Testing 7 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0007744796, Iterations: 7
+Submodular Elapsed time: 0.0005518342, Iterations: 7
+
+Testing 7 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0005493054, Iterations: 7
+Submodular Elapsed time: 0.0004870476, Iterations: 7
+
+Testing 8 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0013185580, Iterations: 8
+Submodular Elapsed time: 0.0009994578, Iterations: 8
+
+Testing 8 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0010769650, Iterations: 8
+Submodular Elapsed time: 0.0011585856, Iterations: 8
+
+Testing 8 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0012352140, Iterations: 8
+Submodular Elapsed time: 0.0011925328, Iterations: 8
+
+Testing 8 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0011680476, Iterations: 8
+Submodular Elapsed time: 0.0012598520, Iterations: 8
+
+Testing 9 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0015314320, Iterations: 9
+Submodular Elapsed time: 0.0016496460, Iterations: 9
+
+Testing 9 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0013868040, Iterations: 9
+Submodular Elapsed time: 0.0018965380, Iterations: 9
+
+Testing 9 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0013103810, Iterations: 9
+Submodular Elapsed time: 0.0014901120, Iterations: 9
+
+Testing 9 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0014279040, Iterations: 9
+Submodular Elapsed time: 0.0014709940, Iterations: 9
+
+Testing 10 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0019660540, Iterations: 10
+Submodular Elapsed time: 0.0019449640, Iterations: 10
+
+Testing 10 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0018663860, Iterations: 10
+Submodular Elapsed time: 0.0017330260, Iterations: 10
+
+Testing 10 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0018714580, Iterations: 10
+Submodular Elapsed time: 0.0019949460, Iterations: 10
+
+Testing 10 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0020108460, Iterations: 10
+Submodular Elapsed time: 0.0020129420, Iterations: 10
+
+Testing 11 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0021534360, Iterations: 11
+Submodular Elapsed time: 0.0021005240, Iterations: 11
+
+Testing 11 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0017634920, Iterations: 11
+Submodular Elapsed time: 0.0021725180, Iterations: 11
+
+Testing 11 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0022448280, Iterations: 11
+Submodular Elapsed time: 0.0030544240, Iterations: 11
+
+Testing 11 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0021852480, Iterations: 11
+Submodular Elapsed time: 0.0023748420, Iterations: 11
+
+Testing 12 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0020873960, Iterations: 12
+Submodular Elapsed time: 0.0019175420, Iterations: 12
+
+Testing 12 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0018377160, Iterations: 12
+Submodular Elapsed time: 0.0023039320, Iterations: 12
+
+Testing 12 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0021198800, Iterations: 12
+Submodular Elapsed time: 0.0023166600, Iterations: 12
+
+Testing 12 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0020290400, Iterations: 12
+Submodular Elapsed time: 0.0025498560, Iterations: 12
+
+Testing 13 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0529896400, Iterations: 13
+Submodular Elapsed time: 0.0512338400, Iterations: 13
+
+Testing 13 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0492820000, Iterations: 13
+Submodular Elapsed time: 0.0554150600, Iterations: 13
+
+Testing 13 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0524211400, Iterations: 13
+Submodular Elapsed time: 0.0483050600, Iterations: 13
+
+Testing 13 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0546343800, Iterations: 13
+Submodular Elapsed time: 0.0542543400, Iterations: 13
+
+Testing 14 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0624870000, Iterations: 14
+Submodular Elapsed time: 0.0631610200, Iterations: 14
+
+Testing 14 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0629191800, Iterations: 14
+Submodular Elapsed time: 0.0590540200, Iterations: 14
+
+Testing 14 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0630152200, Iterations: 14
+Submodular Elapsed time: 0.0583920400, Iterations: 14
+
+Testing 14 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0595122800, Iterations: 14
+Submodular Elapsed time: 0.0653478200, Iterations: 14
+
+Testing 15 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0554982000, Iterations: 15
+Submodular Elapsed time: 0.0647807400, Iterations: 15
+
+Testing 15 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0575726800, Iterations: 15
+Submodular Elapsed time: 0.0561031800, Iterations: 15
+
+Testing 15 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0561800200, Iterations: 15
+Submodular Elapsed time: 0.0600658800, Iterations: 15
+
+Testing 15 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0624938400, Iterations: 15
+Submodular Elapsed time: 0.0632133600, Iterations: 15
+
+Testing 16 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0332763400, Iterations: 16
+Submodular Elapsed time: 0.0321456400, Iterations: 16
+
+Testing 16 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0334583000, Iterations: 16
+Submodular Elapsed time: 0.0348972600, Iterations: 16
+
+Testing 16 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0368396800, Iterations: 16
+Submodular Elapsed time: 0.0326062200, Iterations: 16
+
+Testing 16 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0330894600, Iterations: 16
+Submodular Elapsed time: 0.0345958400, Iterations: 16
+
+Testing 17 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0629447400, Iterations: 17
+Submodular Elapsed time: 0.0598151800, Iterations: 17
+
+Testing 17 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0494891600, Iterations: 17
+Submodular Elapsed time: 0.0566979400, Iterations: 17
+
+Testing 17 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0515650000, Iterations: 17
+Submodular Elapsed time: 0.0490563800, Iterations: 17
+
+Testing 17 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0483502200, Iterations: 17
+Submodular Elapsed time: 0.0507915200, Iterations: 17
+
+Testing 18 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0565630800, Iterations: 18
+Submodular Elapsed time: 0.0660212600, Iterations: 18
+
+Testing 18 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0668220000, Iterations: 18
+Submodular Elapsed time: 0.0633761600, Iterations: 18
+
+Testing 18 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0671758000, Iterations: 18
+Submodular Elapsed time: 0.0590991400, Iterations: 18
+
+Testing 18 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0637714600, Iterations: 18
+Submodular Elapsed time: 0.0582617200, Iterations: 18
+
+Testing 19 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0646479600, Iterations: 19
+Submodular Elapsed time: 0.0597692000, Iterations: 19
+
+Testing 19 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0525469400, Iterations: 19
+Submodular Elapsed time: 0.0540325000, Iterations: 19
+
+Testing 19 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0546089600, Iterations: 19
+Submodular Elapsed time: 0.0718238400, Iterations: 19
+
+Testing 19 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0771884800, Iterations: 19
+Submodular Elapsed time: 0.0574732600, Iterations: 19
+
+Testing 20 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0535261600, Iterations: 20
+Submodular Elapsed time: 0.0549055000, Iterations: 20
+
+Testing 20 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0584770600, Iterations: 20
+Submodular Elapsed time: 0.0545616400, Iterations: 20
+
+Testing 20 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0525528000, Iterations: 20
+Submodular Elapsed time: 0.0525626800, Iterations: 20
+
+Testing 20 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0512572600, Iterations: 20
+Submodular Elapsed time: 0.0521311800, Iterations: 20
+
+Testing 21 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0669498400, Iterations: 21
+Submodular Elapsed time: 0.0670684200, Iterations: 21
+
+Testing 21 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0656877000, Iterations: 21
+Submodular Elapsed time: 0.0667774400, Iterations: 21
+
+Testing 21 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0663817000, Iterations: 21
+Submodular Elapsed time: 0.0650479400, Iterations: 21
+
+Testing 21 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0640616000, Iterations: 21
+Submodular Elapsed time: 0.0652263400, Iterations: 21
+
+Testing 22 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0722625000, Iterations: 22
+Submodular Elapsed time: 0.0826566000, Iterations: 22
+
+Testing 22 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0771181400, Iterations: 22
+Submodular Elapsed time: 0.0726446000, Iterations: 22
+
+Testing 22 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0753413400, Iterations: 22
+Submodular Elapsed time: 0.0708427000, Iterations: 22
+
+Testing 22 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0783048800, Iterations: 22
+Submodular Elapsed time: 0.0694589200, Iterations: 22
+
+Testing 23 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0728237400, Iterations: 23
+Submodular Elapsed time: 0.0784073000, Iterations: 23
+
+Testing 23 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0742934000, Iterations: 23
+Submodular Elapsed time: 0.0762806400, Iterations: 23
+
+Testing 23 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0776584200, Iterations: 23
+Submodular Elapsed time: 0.0815875000, Iterations: 23
+
+Testing 23 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0711845600, Iterations: 23
+Submodular Elapsed time: 0.0846033200, Iterations: 23
+
+Testing 24 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0728902200, Iterations: 24
+Submodular Elapsed time: 0.0755435000, Iterations: 24
+
+Testing 24 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0785253200, Iterations: 24
+Submodular Elapsed time: 0.0688533200, Iterations: 24
+
+Testing 24 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0742037400, Iterations: 24
+Submodular Elapsed time: 0.0822208600, Iterations: 24
+
+Testing 24 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0775084400, Iterations: 24
+Submodular Elapsed time: 0.0722368400, Iterations: 24
+
+Testing 25 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0827856200, Iterations: 25
+Submodular Elapsed time: 0.0843921400, Iterations: 25
+
+Testing 25 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0857704600, Iterations: 25
+Submodular Elapsed time: 0.0765105600, Iterations: 25
+
+Testing 25 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0852725400, Iterations: 25
+Submodular Elapsed time: 0.0911799400, Iterations: 25
+
+Testing 25 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0856336600, Iterations: 25
+Submodular Elapsed time: 0.0802343000, Iterations: 25
+
+Testing 26 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0916058400, Iterations: 26
+Submodular Elapsed time: 0.0874221000, Iterations: 26
+
+Testing 26 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0897937200, Iterations: 26
+Submodular Elapsed time: 0.0877253800, Iterations: 26
+
+Testing 26 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0863318600, Iterations: 26
+Submodular Elapsed time: 0.0794463200, Iterations: 26
+
+Testing 26 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0856179800, Iterations: 26
+Submodular Elapsed time: 0.0798215200, Iterations: 26
+
+Testing 27 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.0824414000, Iterations: 27
+Submodular Elapsed time: 0.0813362200, Iterations: 27
+
+Testing 27 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.0800786600, Iterations: 27
+Submodular Elapsed time: 0.0817703400, Iterations: 27
+
+Testing 27 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.0910117000, Iterations: 27
+Submodular Elapsed time: 0.0823652400, Iterations: 27
+
+Testing 27 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.0843989800, Iterations: 27
+Submodular Elapsed time: 0.0902274000, Iterations: 27
+
+Testing 28 Agents with 2 Tasks 5 times
+Peaked Elapsed time: 0.1093219400, Iterations: 40
+Submodular Elapsed time: 0.1017388400, Iterations: 28
+
+Testing 28 Agents with 3 Tasks 5 times
+Peaked Elapsed time: 0.1075798000, Iterations: 40
+Submodular Elapsed time: 0.1118934000, Iterations: 28
+
+Testing 28 Agents with 4 Tasks 5 times
+Peaked Elapsed time: 0.1023411400, Iterations: 40
+Submodular Elapsed time: 0.0949782600, Iterations: 28
+
+Testing 28 Agents with 5 Tasks 5 times
+Peaked Elapsed time: 0.1107504000, Iterations: 40
+Submodular Elapsed time: 0.1037465800, Iterations: 28
