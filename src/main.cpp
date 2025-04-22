@@ -93,6 +93,10 @@ int main(int argc, char* argv[])
     // parse command line options
     argp_parse (&argp, argc, argv, 0, 0, &args);
 
+    // min tasks check
+    if(args.tasks < 2)
+        args.tasks = 2;
+
     // random functions
     std::random_device rd;
     std::mt19937 gen(rd());
