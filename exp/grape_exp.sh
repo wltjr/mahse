@@ -16,7 +16,7 @@ count=5 	# loop iterations
 
 # variables for commands
 mpi_cmd="mpirun --use-hwthread-cpus --host dev:16,ws:12"
-my_cmd="./mahse -d {dim}"
+my_cmd="./mahse -d ${dim}"
 
 # create logs dir and empty log files
 mkdir -p logs
