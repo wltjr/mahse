@@ -31,6 +31,8 @@ for a in $(seq 5 ${agents}); do
         avg_iter1=0
         avg_time0=0
         avg_time1=0
+        max_iter0=0
+        max_iter1=0
         for i in $(seq ${count}); do
             file0="logs/agents${a}_tasks${t}_peaked_exp_${i}.log"
             file1="logs/agents${a}_tasks${t}_submodular_exp_${i}.log"
@@ -49,6 +51,10 @@ for a in $(seq 5 ${agents}); do
 
             avg_time0=$(bc -l <<< "${avg_time0} + ${etime0/s/}")
             avg_time1=$(bc -l <<< "${avg_time1} + ${etime1/s/}")
+
+            [[ "${iter0}" -gt "${max_iter0}" ]] && max_iter0=${iter0};
+            [[ "${iter1}" -gt "${max_iter1}" ]] && max_iter1=${iter1};
+
         done
         avg_iter0=$((avg_iter0 / count))
         avg_iter1=$((avg_iter1 / count))
@@ -56,8 +62,14 @@ for a in $(seq 5 ${agents}); do
         avg_time0=$(bc -l <<< "${avg_time0} / ${count}")
         avg_time1=$(bc -l <<< "${avg_time1} / ${count}")
 
-        printf "Peaked Elapsed time: %.10f, Iterations: %d \n" ${avg_time0} ${avg_iter0}
-        printf "Submodular Elapsed time: %.10f, Iterations: %d \n" ${avg_time1} ${avg_iter1}
+        printf "Peaked Elapsed time: %.8f, Iterations: avg %d max %d\n" \
+            "${avg_time0}" "${avg_iter0}" "${max_iter0}"
+        printf "Submodular Elapsed time: %.8f, Iterations: avg %d max %d\n" \
+            "${avg_time1}" "${avg_iter1}" "${max_iter1}"
+        printf "(%d, %.8f) (%d, %d) (%d, %d)\n" \
+            "${a}" "${avg_time0}" "${a}" "${avg_iter0}" "${a}" "${max_iter0}"
+        printf "(%d, %.8f) (%d, %d) (%d, %d)\n" \
+            "${a}" "${avg_time1}" "${a}" "${avg_iter1}" "${a}" "${max_iter1}"
         echo
     done
 done
