@@ -9,7 +9,7 @@ r1=10		# reward
 m1=2		# design param
 
 # simulation and experiments
-dim=1000	# grid dimensions
+dim=500     # grid dimensions
 agents=28   # max number of agents to test, starts at 5
 tasks=5     # number of tasks to test, starts at 2
 count=5 	# loop iterations
