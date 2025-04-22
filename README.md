@@ -43,4 +43,19 @@ start at 2 by default, minimum run is 3 nodes/agents, and 2 tasks.
 ```bash
 # run with 5 agents, 2 tasks (default)
 mpirun -np 5 ./mahse
+
+# run with 20 agents across 2 machines(28 max) reward 20, modifier 5, tasks 5, Peaked-Reward
+mpirun --use-hwthread-cpus -np 20 --host host1:16,host2:12 ./mahse -r 20 -m 5 -t 5 -u 0
+```
+
+# Experiments
+A script has been created `exp/grape_exp.sh` that will run grape against a variety
+of agent, tasks, and heuristics and collect data. Values are hard coded but
+variables can be changed at the top for easy of modification for experimentation.
+Log files will be generated for each run in a `logs/` subdirectory of what ever
+directory the script is run in, typically, the root directory of the project,
+where the binary is located as it will not be found otherwise.
+```bash
+# run in project dir
+./exp/grape_exp.sh
 ```
