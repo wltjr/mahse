@@ -1,11 +1,12 @@
-# Multi-Agent Hedonic Coalition Formation for Task Allocation Algorithms Comparison
+# Multi-Agent Hedonic Simulation Environment
 This project aims to implement various multi-agent hedonic coalition formation
-for task allocation algorithms, as a course long project in COT6405: Design and
-Analysis of Algorithms.
+for task allocation algorithms for research purposes.
 
 The following algorithms are implemented:
 - GRAPE: Anonymous Hedonic Game for Task Allocation in a Large-Scale Multiple
   Agent System [link](https://ieeexplore.ieee.org/abstract/document/8439076)
+
+The following algorithms are planning to be implemented:
 - GRAPE-S: Near Real-Time Coalition Formation for Multiple Service Collectives
   [link](https://arxiv.org/abs/2310.12480)
 
