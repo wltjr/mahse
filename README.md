@@ -1,4 +1,8 @@
 # Multi-Agent Hedonic Simulation Environment
+[![License](http://img.shields.io/badge/license-MIT-blue.svg?colorB=9977bb&style=plastic)](https://github.com/wltjr/mahse/blob/master/LICENSE)
+![Build Status](https://github.com/wltjr/mahse/actions/workflows/build.yml/badge.svg)
+[![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=wltjr_mahse&metric=alert_status)](https://sonarcloud.io/dashboard?id=wltjr_mahse)
+
 This project aims to implement various multi-agent hedonic coalition formation
 for task allocation algorithms for research purposes.
 
