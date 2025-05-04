@@ -5,7 +5,7 @@
 #include <iostream>
 #include <random>
 
-#include "agent.hpp"
+#include "grape.hpp"
 
 const char *argp_program_version = "Version 0.1";
 const char *argp_program_bug_address = "@unf.edu";
@@ -59,7 +59,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
             args->tasks = arg ? atoi (arg) : 2;
             break;
         case 'u':
-            args->utility = arg ? atoi (arg) : Agent::submodular;
+            args->utility = arg ? atoi (arg) : Grape::submodular;
             break;
         default:
             return ARGP_ERR_UNKNOWN;
@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
     double timer;
     struct args args;
     std::vector<Task> tasks;
-    Agent agent;
+    Grape agent;
     Point coords;
 
     // default arguments
@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
     args.modifier = 0;
     args.reward = 0;
     args.tasks = 2;
-    args.utility = Agent::submodular;
+    args.utility = Grape::submodular;
 
     // parse command line options
     argp_parse (&argp, argc, argv, 0, 0, &args);
@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
         std::cout << "Reward Heuristic: ";
         switch(args.utility)
         {
-            case Agent::peaked:
+            case Grape::peaked:
                 std::cout << "Peaked-Reward";
                 break;
             default:
@@ -142,7 +142,7 @@ int main(int argc, char* argv[])
             {
                 switch(args.utility)
                 {
-                    case Agent::peaked:
+                    case Grape::peaked:
                         args.reward = urd3(gen) * size / args.tasks;
                         args.modifier = size / args.tasks; // n^d_j rounded (r^max_j / ∑_{∀t_k∈T*} r^max_k) * n_a
                         break;
@@ -199,7 +199,7 @@ int main(int argc, char* argv[])
     coords.x = urd1(gen);
     coords.y = urd1(gen);
 
-    agent = Agent(rank + 1, size, coords, tasks, static_cast<Agent::rewards>(args.utility));
+    agent = Grape(rank + 1, size, coords, tasks, static_cast<Grape::rewards>(args.utility));
 
     // Display agent information
     if (rank == 0)
