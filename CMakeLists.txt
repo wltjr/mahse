@@ -25,7 +25,7 @@ find_package(MPI REQUIRED)
 include_directories(src)
 
 # executable binaries - Multi-Agent Hedonic Simulation Environment
-add_executable(mahse src/main.cpp src/agent.cpp src/task.cpp)
+add_executable(mahse src/main.cpp src/agent.cpp src/task.cpp src/grape.cpp )
 
 # link executable binaries to shared object libraries
 target_link_libraries(mahse PUBLIC MPI::MPI_CXX)
