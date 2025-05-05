@@ -74,7 +74,7 @@ class Task
          * @param position current position in buffer, in bytes (integer)
          * @param comm 	communicator for packed message (handle)
          */
-        void unpack(char *buffer, int size, int &position, MPI_Comm comm);
+        void unpack(const char *buffer, int size, int &position, MPI_Comm comm);
 
     private:
         int id;
