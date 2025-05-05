@@ -73,7 +73,7 @@ static struct argp argp	 =  { options, parse_opt };
 int main(int argc, char* argv[])
 {
     const int BUFFER_SIZE = 1024;
-    char buffer[BUFFER_SIZE];
+    std::vector<char> buffer(BUFFER_SIZE);
     int rank;
     int size;
     int position;
@@ -180,12 +180,12 @@ int main(int argc, char* argv[])
     if (rank == 0)
     {
         for (auto& task : tasks)
-            task.pack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
+            task.pack(&buffer[0], BUFFER_SIZE, position, MPI_COMM_WORLD);
     }
 
     // Broadcast the packed data length and data
     MPI_Bcast(&position, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Bcast(&buffer, position, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&buffer[0], position, MPI_INT, 0, MPI_COMM_WORLD);
 
     // All processes except root unpack the data
     if (rank !=0 )
@@ -193,7 +193,7 @@ int main(int argc, char* argv[])
         tasks.resize(args.tasks);
         position = 0;
         for (int i = 0; i < args.tasks; i++)
-            tasks[i].unpack(buffer, BUFFER_SIZE, position, MPI_COMM_WORLD);
+            tasks[i].unpack(&buffer[0], BUFFER_SIZE, position, MPI_COMM_WORLD);
     }
 
     coords.x = urd1(gen);
