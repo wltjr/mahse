@@ -28,28 +28,28 @@ class Task
          *
          * @return the tasks coordinates (x,y)
          */
-        Point get_coords();
+        Point get_coords() const;
 
         /**
          * @brief Id getter
          *
          * @return the tasks id
          */
-        int get_id();
+        int get_id() const;
 
         /**
          * @brief Modifier getter
          *
          * @return the tasks reward modifier value
          */
-        int get_modifier();
+        int get_modifier() const;
 
         /**
          * @brief Reward getter
          *
          * @return the tasks reward value
          */
-        int get_reward();
+        int get_reward() const;
 
         /**
          * @brief Destroy the Task object, empty/unused
