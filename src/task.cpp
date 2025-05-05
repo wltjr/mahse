@@ -7,22 +7,22 @@ Task::~Task() = default;
 Task::Task(int id, Point coords, int reward, int modifier) :
     id(id), coords(coords), reward(reward), modifier(modifier) {};
 
-Point Task::get_coords()
+Point Task::get_coords() const
 {
     return coords;
 }
 
-int Task::get_id()
+int Task::get_id() const
 {
     return id;
 }
 
-int Task::get_modifier()
+int Task::get_modifier() const
 {
     return modifier;
 }
 
-int Task::get_reward()
+int Task::get_reward() const
 {
     return reward;
 }
