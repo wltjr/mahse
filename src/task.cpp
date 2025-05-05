@@ -9,22 +9,22 @@ Task::Task(int id, Point coords, int reward, int modifier) :
 
 Point Task::get_coords()
 {
-    return(coords);
+    return coords;
 }
 
 int Task::get_id()
 {
-    return(id);
+    return id;
 }
 
 int Task::get_modifier()
 {
-    return(modifier);
+    return modifier;
 }
 
 int Task::get_reward()
 {
-    return(reward);
+    return reward;
 }
 
 void Task::pack(char *buffer, int size, int &position, MPI_Comm comm)
