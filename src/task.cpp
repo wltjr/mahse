@@ -27,7 +27,7 @@ int Task::get_reward() const
     return reward;
 }
 
-void Task::pack(char *buffer, int size, int &position, MPI_Comm comm)
+void Task::pack(char *buffer, int size, int &position, MPI_Comm comm) const
 {
     MPI_Pack(&id, 1, MPI_INT, buffer, size, &position, comm);
     MPI_Pack(&coords.x, 1, MPI_INT, buffer, size, &position, comm);
