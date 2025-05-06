@@ -64,7 +64,7 @@ class Task
          * @param position current position in buffer, in bytes (integer)
          * @param comm 	communicator for packed message (handle)
          */
-        void pack(char *buffer, int size, int &position, MPI_Comm comm);
+        void pack(char *buffer, int size, int &position, MPI_Comm comm) const;
 
         /**
          * @brief Unpack a class instance stored contiguous memory from MPI
