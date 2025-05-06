@@ -76,7 +76,7 @@ void Grape::decision()
             if(utility_max > utility_cur) // t_j∗, |S_j∗|) ≻_i (t_{Πi(i)} , |S_{Πi (i)}|)
             {
                 // leave the current coalition (may need new structure O(N) operation)
-                if(auto itr = std::find(partitions[task].begin(), partitions[task].end(), id);
+                if(auto itr = std::ranges::find(partitions[task].begin(), partitions[task].end(), id);
                    itr != partitions[task].end())
                     partitions[task].erase(itr);
                 task = task_max;
@@ -124,7 +124,7 @@ void Grape::decision()
                     int t_id;
 
                     t_id = t.get_id();
-                    auto itr = std::find(partitions[t_id].begin(), partitions[t_id].end(), id);
+                    auto itr = std::ranges::find(partitions[t_id].begin(), partitions[t_id].end(), id);
                     if(itr != partitions[t_id].end())
                     {
                         task = t_id;
