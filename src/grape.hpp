@@ -34,7 +34,7 @@ class Grape: public Agent
         /**
          * @brief Decentralized decision-making algorithm
          */
-        void decision();
+        void decision() override;
 
         /**
          * @brief Destroy the Agent object, empty/unused
@@ -73,6 +73,6 @@ class Grape: public Agent
          *
          * @param task the task index number, e.g. the j in (t_j, S_j)
          */
-        int utility(int task);
+        int utility(int task) override;
 };
 #endif
