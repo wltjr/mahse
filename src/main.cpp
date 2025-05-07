@@ -159,7 +159,7 @@ int main(int argc, char* argv[])
 
         // Display tasks information
         std::cout << args.tasks << " Tasks:" << std::endl;
-        for (auto& task : tasks) 
+        for (auto const & task : tasks) 
         {
             std::cout <<
                 std::format("Id: {}, Coords: ({},{}), Reward: {}, Modifier: {}",
@@ -179,7 +179,7 @@ int main(int argc, char* argv[])
     position = 0;
     if (rank == 0)
     {
-        for (auto& task : tasks)
+        for (auto const & task : tasks)
             task.pack(&buffer[0], BUFFER_SIZE, position, MPI_COMM_WORLD);
     }
 
