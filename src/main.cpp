@@ -21,7 +21,7 @@ struct args
 };
 
 // help menu
-static struct argp_option options[] = {
+constexpr static struct argp_option options[] = {
     {0,0,0,0,"Optional arguments:",1},
     {"dimension",'d',"1000",0," Grid dimensions, e.g. 1000 ",1},
     {"modifier",'m',"2",0," Reward modifier integer, random if unset ",1},
@@ -68,7 +68,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
 }
 
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
-static struct argp argp	 =  { options, parse_opt };
+constexpr static struct argp argp	 =  { options, parse_opt };
 
 int main(int argc, char* argv[])
 {
