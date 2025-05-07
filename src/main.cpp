@@ -115,9 +115,6 @@ int main(int argc, char* argv[])
         std::uniform_real_distribution<> urd2(2, 3);
         std::uniform_real_distribution<> urd3(args.dim, args.dim + args.dim);
 
-        coords.x = 0;
-        coords.y = 0;
-
         std::cout << "Reward Heuristic: ";
         if(args.utility == Grape::peaked)
             std::cout << "Peaked-Reward";
@@ -125,8 +122,11 @@ int main(int argc, char* argv[])
             std::cout << "Submodular";
         std::cout << std::endl;
 
+        // null task
+        coords.x = 0;
+        coords.y = 0;
         tasks.emplace_back(0, coords, 0, 0);
-    
+
         for(int i = 0; i < args.tasks; i++)
         {
             coords.x = urd1(gen);
