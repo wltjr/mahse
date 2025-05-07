@@ -17,7 +17,7 @@ class Agent
         /**
          * @brief Decision-making algorithm
          */
-        void decision();
+        virtual void decision() = 0;
 
         /**
          * @brief Destroy the Agent object, empty/unused
