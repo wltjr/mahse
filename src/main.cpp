@@ -119,15 +119,10 @@ int main(int argc, char* argv[])
         coords.y = 0;
 
         std::cout << "Reward Heuristic: ";
-        switch(args.utility)
-        {
-            case Grape::peaked:
-                std::cout << "Peaked-Reward";
-                break;
-            default:
-                std::cout << "Submodular";
-                break;
-        }
+        if(args.utility == Grape::peaked)
+            std::cout << "Peaked-Reward";
+        else
+            std::cout << "Submodular";
         std::cout << std::endl;
 
         tasks.emplace_back(0, coords, 0, 0);
@@ -140,17 +135,16 @@ int main(int argc, char* argv[])
             // random reward & modifier from paper if not specified
             if(!args.reward && !args.modifier)
             {
-                switch(args.utility)
+                if(args.utility == Grape::peaked)
                 {
-                    case Grape::peaked:
                         args.reward = urd3(gen) * size / args.tasks;
                         args.modifier = size / args.tasks; // n^d_j rounded (r^max_j / ∑_{∀t_k∈T*} r^max_k) * n_a
-                        break;
-                    default:
+                }
+                else
+                {
                         args.modifier = urd2(gen);
                         args.reward = urd3(gen) *
                                 1 / (std::log(size / args.tasks + 1) / std::log(args.modifier));
-                        break;
                 }
             }
 
