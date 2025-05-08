@@ -104,7 +104,7 @@ void Grape::decision()
         // {r^i , s^i , Π^i }, satisfied = decision_mutex(M^i_rcv)
         // inlined decision_mutex(), no reason for a separate function/method
         satisfied = true;
-        for (auto &msg : msgs)
+        for (auto const & msg : msgs)
         {
             int r_k;
             double s_k;
@@ -119,7 +119,7 @@ void Grape::decision()
                 satisfied = false;
 
                 // set agent's task and utility from partition coalition update
-                for(auto &t: tasks)
+                for(auto const & t: tasks)
                 {
                     int t_id;
 
