@@ -177,21 +177,16 @@ int Grape::utility(int task)
     if(task != this->task)
         participants++;
 
-    switch(reward)
-    {
-        // Peaked Reward
-        case peaked:
-            value = (tasks[task].get_reward() * participants) / modifier *
-                     std::pow(std::exp(1.0), -participants / modifier + 1);
-                    // std::pow(std::numbers::e, -participants / desired + 1)
-            break;
-        // Submodular Reward
-        default:
-            value = tasks[task].get_reward() *
-                    (std::log(participants + modifier - 1) / std::log(modifier))  // log(n) / log(base)
-                    / participants;
-            break;
-    }
+    // Peaked Reward
+    if(reward == peaked)
+        value = (tasks[task].get_reward() * participants) / modifier *
+                    std::pow(std::exp(1.0), -participants / modifier + 1);
+                 // std::pow(std::numbers::e, -participants / desired + 1)
+    // Submodular Reward
+    else
+        value = tasks[task].get_reward() *
+                (std::log(participants + modifier - 1) / std::log(modifier))  // log(n) / log(base)
+                / participants;
 
     return value - distance(task);
 }
