@@ -124,8 +124,9 @@ void Grape::decision()
                     int t_id;
 
                     t_id = t.get_id();
-                    auto itr = std::ranges::find(partitions[t_id], id);
-                    if(itr != partitions[t_id].end())
+
+                    if(auto itr = std::ranges::find(partitions[t_id], id);
+                       itr != partitions[t_id].end())
                     {
                         task = t_id;
                         if(task == 0)
