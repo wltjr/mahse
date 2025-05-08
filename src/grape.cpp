@@ -247,7 +247,7 @@ std::vector<std::tuple<int, double, std::vector<std::vector<int>>>>
             for(int  j = 0; j < coalition_size; j++)
                 MPI_Unpack(buffer, size, &pos, &p_k[i][j], 1, MPI_INT, comm);
         }
-        msgs.emplace_back(std::make_tuple(r_k, s_k, p_k));
+        msgs.emplace_back(r_k, s_k, p_k);
     }
     return msgs;
 }
